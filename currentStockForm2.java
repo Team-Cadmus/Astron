@@ -334,7 +334,7 @@ else{try{
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=base.getSelectedItem().toString();
      designToExtract="";
     designToExtract=design.getText().toUpperCase().trim();
@@ -453,7 +453,7 @@ catch (ClassNotFoundException | SQLException e) {
              Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=base.getSelectedItem().toString();
             PreparedStatement pst;
             String sql="";
@@ -628,7 +628,7 @@ new currentStockForm3();
             
                 try{
             Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");  
+            Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");  
             PreparedStatement pst;
                 String selBase=base.getSelectedItem().toString();
                 String sql="";
@@ -884,7 +884,7 @@ public void DatabaseName(){
         
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=base.getSelectedItem().toString().toUpperCase();
     /*String sql="select * from balatan_rich_pallu";
         java.sql.Statement pst=con.createStatement();
