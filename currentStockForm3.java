@@ -386,7 +386,7 @@ else{try{
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=base.getSelectedItem().toString();
      designToExtract="";
     designToExtract=design.getText().toUpperCase().trim();
@@ -524,7 +524,7 @@ catch (ClassNotFoundException | SQLException e) {
      PreparedStatement pst;
      ResultSet rs;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     
@@ -669,7 +669,7 @@ catch (ClassNotFoundException | SQLException e) {
      Connection con;
      PreparedStatement pst;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
@@ -829,7 +829,7 @@ dispose();// TODO add your handling code here:
      Connection con;
      PreparedStatement pst;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
@@ -990,7 +990,7 @@ if(design.getText().trim().isEmpty()){
      Connection con;
      PreparedStatement pst;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
