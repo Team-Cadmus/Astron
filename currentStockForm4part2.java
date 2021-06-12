@@ -121,7 +121,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=base.getSelectedItem().toString();
     String query1="";
     switch (SelectedBase) {
@@ -394,7 +394,7 @@ else if(update_design.getText()!=""){
     
     try{
              Class.forName("com.mysql.cj.jdbc.Driver");  
-             Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");  
+             Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");  
             DefaultTableModel model = (DefaultTableModel) brp_table.getModel();
             String design, rms, gr, mill, total, selectedBase, query=null, deleteQuery;
             PreparedStatement pst = null;
