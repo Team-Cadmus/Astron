@@ -56,12 +56,14 @@ public class Collection1 extends javax.swing.JFrame {
 
         initComponents();
         FillCombo();
-        setSize(1280,755);
+        FillAgentCombo();
+        setSize(1366,768);
         //User_Rights();
     setLocation(screenSize.width/2-getWidth()/2, screenSize.height/2-getHeight()/2);
     setVisible(true);
     
         name_combo2.setRenderer(new Collection1.Demo(name_combo2.getRenderer()));
+        agent_dropbox.setRenderer(new Collection1.Demo(agent_dropbox.getRenderer()));
         jScrollPane2.getViewport().setBackground(new Color(116,121,180));
         TableCellRenderer alteredColorRenderer = new AlterColor();
         col_table2.setDefaultRenderer(Object.class, alteredColorRenderer);
@@ -107,25 +109,31 @@ public class Collection1 extends javax.swing.JFrame {
         col_table2.getTableHeader().getColumnModel().getColumn(4).setHeaderRenderer(headerClr);
         col_table2.getTableHeader().getColumnModel().getColumn(5).setHeaderRenderer(headerClr);
         col_table2.getTableHeader().getColumnModel().getColumn(6).setHeaderRenderer(headerClr);
+        col_table2.getTableHeader().getColumnModel().getColumn(7).setHeaderRenderer(headerClr);
+        col_table2.getTableHeader().getColumnModel().getColumn(8).setHeaderRenderer(headerClr);
         JTableHeader tableHeader = col_table2.getTableHeader();
         tableHeader.setVisible(true);
-        tableHeader.setFont(new Font("Copperplate Gothic Bold",1, 18));
+        tableHeader.setFont(new Font("Copperplate Gothic Bold",1, 14));
         tableHeader.setOpaque(false); 
         tableHeader.setForeground(new Color(255,255,255));
         TableColumn tc1=col_table2.getColumnModel().getColumn(0);
         tc1.setPreferredWidth(100);
         TableColumn tc2=col_table2.getColumnModel().getColumn(1);
-        tc2.setPreferredWidth(80);
+        tc2.setPreferredWidth(75);
         TableColumn tc3=col_table2.getColumnModel().getColumn(2);
-        tc3.setPreferredWidth(25);
+        tc3.setPreferredWidth(20);
         TableColumn tc4=col_table2.getColumnModel().getColumn(3);
         tc4.setPreferredWidth(60);
         TableColumn tc5=col_table2.getColumnModel().getColumn(4);
-        tc5.setPreferredWidth(60);
+        tc5.setPreferredWidth(100);
         TableColumn tc6=col_table2.getColumnModel().getColumn(5);
-        tc6.setPreferredWidth(25);
+        tc6.setPreferredWidth(60);
         TableColumn tc7=col_table2.getColumnModel().getColumn(6);
-        tc7.setPreferredWidth(60);
+        tc7.setPreferredWidth(15);
+        TableColumn tc8=col_table2.getColumnModel().getColumn(7);
+        tc8.setPreferredWidth(60);
+        TableColumn tc9=col_table2.getColumnModel().getColumn(8);
+        tc9.setPreferredWidth(100);
     }
 
     /**
@@ -210,11 +218,8 @@ public class Collection1 extends javax.swing.JFrame {
         gr_amt2 = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         days_decd2 = new javax.swing.JTextField();
-        insert_name2 = new javax.swing.JButton();
         insert_data2 = new javax.swing.JButton();
-        update_party_name2 = new javax.swing.JButton();
         update_details2 = new javax.swing.JButton();
-        delete_party2 = new javax.swing.JButton();
         delete_details2 = new javax.swing.JButton();
         reset2 = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
@@ -225,11 +230,12 @@ public class Collection1 extends javax.swing.JFrame {
         gr_amt_total = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         outstanding = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        agent_dropbox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Collection");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("Software_logo.jpeg")).getImage());
-        setMaximumSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(31, 35, 71));
@@ -553,13 +559,13 @@ public class Collection1 extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Collection");
         jPanel2.add(jLabel18);
-        jLabel18.setBounds(349, 11, 249, 41);
+        jLabel18.setBounds(630, 10, 249, 41);
 
         jLabel19.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Party Name:");
         jPanel2.add(jLabel19);
-        jLabel19.setBounds(10, 80, 180, 20);
+        jLabel19.setBounds(10, 20, 180, 20);
 
         PartyName2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         PartyName2.addActionListener(new java.awt.event.ActionListener() {
@@ -568,15 +574,15 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(PartyName2);
-        PartyName2.setBounds(220, 80, 210, 30);
+        PartyName2.setBounds(220, 20, 210, 30);
 
-        col_table2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        col_table2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         col_table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Order Date", "Bill No", "Days", "Amt", "Recd Amt", "XS", "GR Amt"
+                "Bill Dt", "Bill No", "Days", "Amt", "Rcd Dt", "Rcd Amt", "XS", "GR Amt", "Agent"
             }
         ));
         col_table2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -587,8 +593,9 @@ public class Collection1 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(col_table2);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(450, 60, 790, 402);
+        jScrollPane2.setBounds(450, 60, 890, 402);
 
+        name_combo2.setBackground(new java.awt.Color(249, 173, 129));
         name_combo2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         name_combo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,7 +603,7 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(name_combo2);
-        name_combo2.setBounds(220, 120, 210, 27);
+        name_combo2.setBounds(220, 60, 210, 27);
 
         jLabel20.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -720,19 +727,8 @@ public class Collection1 extends javax.swing.JFrame {
         jPanel2.add(days_decd2);
         days_decd2.setBounds(220, 630, 210, 27);
 
-        insert_name2.setBackground(new java.awt.Color(255, 138, 115));
-        insert_name2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
-        insert_name2.setText("Insert Party Name");
-        insert_name2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insert_name2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(insert_name2);
-        insert_name2.setBounds(460, 580, 190, 25);
-
         insert_data2.setBackground(new java.awt.Color(255, 138, 115));
-        insert_data2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        insert_data2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         insert_data2.setText("Insert Party Data");
         insert_data2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -740,21 +736,10 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(insert_data2);
-        insert_data2.setBounds(460, 540, 190, 25);
-
-        update_party_name2.setBackground(new java.awt.Color(255, 138, 115));
-        update_party_name2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
-        update_party_name2.setText("Update Party Name");
-        update_party_name2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_party_name2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(update_party_name2);
-        update_party_name2.setBounds(460, 490, 190, 25);
+        insert_data2.setBounds(460, 490, 250, 29);
 
         update_details2.setBackground(new java.awt.Color(255, 138, 115));
-        update_details2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        update_details2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         update_details2.setText("Update Details");
         update_details2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -762,21 +747,10 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(update_details2);
-        update_details2.setBounds(670, 490, 160, 25);
-
-        delete_party2.setBackground(new java.awt.Color(255, 138, 115));
-        delete_party2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
-        delete_party2.setText("Delete Party");
-        delete_party2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delete_party2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(delete_party2);
-        delete_party2.setBounds(670, 540, 160, 25);
+        update_details2.setBounds(460, 530, 250, 29);
 
         delete_details2.setBackground(new java.awt.Color(255, 138, 115));
-        delete_details2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        delete_details2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         delete_details2.setText("Delete Details");
         delete_details2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -784,10 +758,10 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(delete_details2);
-        delete_details2.setBounds(670, 590, 160, 25);
+        delete_details2.setBounds(460, 570, 250, 29);
 
         reset2.setBackground(new java.awt.Color(255, 138, 115));
-        reset2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        reset2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         reset2.setText("Reset");
         reset2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -795,7 +769,7 @@ public class Collection1 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(reset2);
-        reset2.setBounds(460, 620, 120, 25);
+        reset2.setBounds(460, 610, 250, 25);
 
         jLabel31.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
@@ -837,8 +811,19 @@ public class Collection1 extends javax.swing.JFrame {
         jPanel2.add(outstanding);
         outstanding.setBounds(1040, 600, 180, 27);
 
+        jLabel35.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Agent:");
+        jPanel2.add(jLabel35);
+        jLabel35.setBounds(10, 110, 100, 21);
+
+        agent_dropbox.setBackground(new java.awt.Color(249, 173, 129));
+        agent_dropbox.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        jPanel2.add(agent_dropbox);
+        agent_dropbox.setBounds(220, 110, 210, 27);
+
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1420, 766);
+        jPanel2.setBounds(0, 0, 1370, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -917,24 +902,8 @@ private void FillCombo(){
      
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
-    /*String selQuery="SELECT * FROM party_table ORDER BY PartyName";
-            PreparedStatement pst=con.prepareStatement(selQuery);
-            ResultSet rs=pst.executeQuery();
-            DefaultComboBoxModel cbmObj=new DefaultComboBoxModel();
-            cbmObj.removeAllElements();
-            //cbmObj=(DefaultComboBoxModel) PartyName2_dropbox.getModel();
-            String temp="";
-            while(rs.next()){
-                temp = (String)rs.getString("PartyName");
-                cbmObj.addElement(temp);
-            }
-            name_combo2.setModel(cbmObj);
-            //PartyName2.setText("");
-        }
-        catch(Exception e){
-                
-        }*/
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    
     String sql="select PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
     ResultSet rs=pst.executeQuery();
@@ -945,23 +914,48 @@ private void FillCombo(){
     name_combo2.setModel(model);
     //con.close();
     //pst.close();
-    
-        
-        
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
         }
-    /*ArrayList<Items> list= Items();
-    DefaultComboBoxModel model=(DefaultComboBoxModel)name_combo2.getModel();
-    String[] row=new String[1];
+    }
+private void FillAgentCombo(){
+    DefaultComboBoxModel model = new DefaultComboBoxModel(); 
+    try{
+         
+         
+        Class.forName("com.mysql.cj.jdbc.Driver");
      
-    for(int i=0;i<list.size();i++){
-                row[0]=list.get(i).getName();
-                
-        
-        model.addItem(row[]);
-}*/
+     Connection con;
+    con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    
+    String sql="select agent1,agent2,agent3 from party_details";
+    PreparedStatement pst=con.prepareStatement(sql);
+    ResultSet rs=pst.executeQuery();
+    while(rs.next()){
+        String name1=rs.getString("agent1");
+        String name2=rs.getString("agent2");
+        String name3=rs.getString("agent3");
+        if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
+        model.addElement(name1);
+        }
+                if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
+
+        model.addElement(name2);
+                }
+                        if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
+
+        model.addElement(name3);
+                        }
+    }
+    agent_dropbox.setModel(model);
+    //con.close();
+    //pst.close();
+    }
+    catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
 }
 
     private void name_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboboxActionPerformed
@@ -1071,6 +1065,7 @@ private void FillCombo(){
  {
      PartyName2.setText("");
         name_combo2.setSelectedIndex(0);
+        agent_dropbox.setSelectedIndex(0);
         order_date2.setDate(null);
         billNo2.setText("");
         days2.setText("");
@@ -1144,7 +1139,7 @@ private void FillCombo(){
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String SelectedBase=name_combo2.getSelectedItem().toString();
     /*String query1="SELECT partyname FROM party_table";
     PreparedStatement pst=con.prepareStatement(query1);
@@ -1162,7 +1157,7 @@ private void FillCombo(){
         pst1.setString(1,PartyName2.getText().toUpperCase());
         ResultSet rs1=pst1.executeQuery();
         while(rs1.next()){
-        col=new DataColl(rs1.getString("OrderDate"),rs1.getString("BillNumber"),rs1.getString("Days"),rs1.getString("Amount"),rs1.getString("RecievedDate"),rs1.getString("RecievedAmount"),rs1.getString("ExcessDays"),rs1.getString("GRNumber"),rs1.getString("GRDate"),rs1.getString("GRAmount"),rs1.getString("DaysDecided"));
+        col=new DataColl(rs1.getString("OrderDate"),rs1.getString("BillNumber"),rs1.getString("Days"),rs1.getString("Amount"),rs1.getString("RecievedDate"),rs1.getString("RecievedAmount"),rs1.getString("ExcessDays"),rs1.getString("GRNumber"),rs1.getString("GRDate"),rs1.getString("GRAmount"),rs1.getString("DaysDecided"),rs1.getString("Outstanding"),rs1.getString("Agent"));
         ColList.add(col);
         }
         }
@@ -1174,7 +1169,7 @@ private void FillCombo(){
     public void show_user(){
     ArrayList<DataColl> list= DataColl();
     DefaultTableModel model=(DefaultTableModel)col_table2.getModel();
-    String[] row=new String[11];
+    String[] row=new String[13];
      int amttotal=0,recdtotal=0,grtotal=0,outstandingtotal=0;
     for(int i=0;i<list.size();i++){
         
@@ -1183,16 +1178,18 @@ private void FillCombo(){
         row[2]=list.get(i).getDays();
         row[3]=list.get(i).getAmount();
        // row[0]=list.get(i).getRecdDate();
-        row[4]=list.get(i).getRecdAmt();
-        row[5]=list.get(i).xsDays();
+        row[4]=list.get(i).getRecdDate();
+        row[5]=list.get(i).getRecdAmt();
         //row[5]=list.get(i).getGRNumber();
        // row[0]=list.get(i).getGRDate();
-        row[6]=list.get(i).getGRAmount();
+        row[6]=list.get(i).xsDays();
+        row[7]=list.get(i).getGRAmount();
+        row[8]=list.get(i).getagent();
         //row[0]=list.get(i).getDateDecided();
         model.addRow(row);
         amttotal=amttotal+Integer.parseInt(row[3]);
-        recdtotal=recdtotal+Integer.parseInt(row[4]);
-        grtotal=grtotal+Integer.parseInt(row[6]);
+        recdtotal=recdtotal+Integer.parseInt(row[5]);
+        grtotal=grtotal+Integer.parseInt(row[7]);
         outstandingtotal=amttotal-recdtotal-grtotal;
     }
    amt_total.setText(String.valueOf(amttotal));
@@ -1843,8 +1840,8 @@ try{
             String billNo=(String) model.getValueAt(i,1);
             Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
-            String selQuery="Select RecievedDate,DaysDecided,GRNumber,GRDate from collection1 where BillNumber=?";
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+            String selQuery="Select RecievedDate,DaysDecided,GRNumber,GRDate,Agent from collection1 where BillNumber=?";
             PreparedStatement pst=con.prepareStatement(selQuery); 
             pst.setString(1, billNo);
             ResultSet rs=pst.executeQuery(); 
@@ -1864,28 +1861,29 @@ try{
             }
             
             amt2.setText((String) model.getValueAt(i,3));
-                      if(model.getValueAt(i,4).toString()==null){
+                      if(model.getValueAt(i,5).toString()==null){
                 recd_amt2.setText("");
             }else{
-                recd_amt2.setText(model.getValueAt(i,4).toString());
+                recd_amt2.setText(model.getValueAt(i,5).toString());
             }  
-            if(model.getValueAt(i,5).toString()==null){
+            if(model.getValueAt(i,6).toString()==null){
                 xs_days2.setText("");
             }else{
-                xs_days2.setText(model.getValueAt(i,5).toString());
+                xs_days2.setText(model.getValueAt(i,6).toString());
             }
             
-            if(model.getValueAt(i,6).toString()==null){
+            if(model.getValueAt(i,7).toString()==null){
                 gr_amt2.setText("");
             }else{
-                gr_amt2.setText(model.getValueAt(i,6).toString());
+                gr_amt2.setText(model.getValueAt(i,7).toString());
             }  
-            String recdd1=null,grno=null,days2dec=null,grdat=null;   
+            String recdd1=null,grno=null,days2dec=null,grdat=null,agent=null;   
             if(rs.next()){
                 recdd1=rs.getString("RecievedDate");        
                 days2dec=rs.getString("DaysDecided");  
                 grno=rs.getString("GRNumber");  
                 grdat=rs.getString("GRDate");  
+                agent=rs.getString("Agent");
             }
             
              try {
@@ -1900,6 +1898,7 @@ try{
                 System.out.println(ex.getMessage());
                 Logger.getLogger(Collection1.class.getName()).log(Level.SEVERE, null, ex);
             }
+             agent_dropbox.setSelectedItem(agent);
             
             
             
@@ -1933,67 +1932,6 @@ try{
         }
                 // TODO add your handling code here:
     }//GEN-LAST:event_col_table2MouseClicked
-
-    private void insert_name2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_name2ActionPerformed
-
-    if(PartyName2.getText().isEmpty()){
-                new PartyName_FieldEmpty().setVisible(true);
-                }
-        else{
-             
-        try{
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-     Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
-    String nameOfParty= PartyName2.getText().trim().toUpperCase();
-    String sql="select PartyName from party_table";
-    PreparedStatement pst=con.prepareStatement(sql);
-    ResultSet rs=pst.executeQuery();
-    int count=0;
-                    while(rs.next()){
-                        String stringToCompare = rs.getString("PartyName"); 
-                        if(nameOfParty.equals(stringToCompare)){
-                           count++;
-                        }
-                    }
-    if(count==0){
-    
-        String query="insert into party_table(PartyName) values(?)";
-    PreparedStatement pst1=con.prepareStatement(query);
-    pst1.setString(1,PartyName2.getText().toUpperCase());
-        pst1.executeUpdate();
-        FillCombo();
-            new InsertedSuccessfully().setVisible(true);
-    
-    
-    }
-        else{
-        new PrartyName_Repeat().setVisible(true);
-    }
-            
-        
-        /*else if(PartyName2.getText().trim().isEmpty())
-        {
-                JOptionPane.showMessageDialog(this,"Null values cannot be inserted");
-                }*/
-        
-        
-        
-      //PartyName2.setText("");  
-    }
-  
-     //PartyName2.setText("");
-        
-        catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e.getMessage());
-        }
-             
-            
-        }
-// TODO add your handling code here:
-    }//GEN-LAST:event_insert_name2ActionPerformed
 
     private void name_combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_combo2ActionPerformed
 if(name_combo2.getSelectedItem().toString().isEmpty()==false){
@@ -2102,67 +2040,6 @@ try{
         }         // TODO add your handling code here:
     }//GEN-LAST:event_gr_date2PropertyChange
 
-    private void update_party_name2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_party_name2ActionPerformed
-if(PartyName2.getText().isEmpty()){
-    new AlertBox_FieldEmpty().setVisible(true);
-}
-else{
-    
-    try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
-    String nameOfParty= PartyName2.getText().trim().toUpperCase();
-    String sql="select PartyName from party_table";
-    PreparedStatement pst=con.prepareStatement(sql);
-    ResultSet rs=pst.executeQuery();
-    int count=0;
-                    while(rs.next()){
-                        String stringToCompare = rs.getString("PartyName"); 
-                        if(nameOfParty.equals(stringToCompare)){
-                           count++;
-                        }
-                    }
-                    if(count==0){
-    String selectedItem = (String) name_combo2.getSelectedItem();
-    String sql1="SELECT Party_No from party_table WHERE PartyName=?";
-    PreparedStatement pst1=con.prepareStatement(sql1);
-    pst1.setString(1,selectedItem);
-    ResultSet rs1=pst1.executeQuery();
-    if (rs1.next()){
-        int partyno=rs1.getInt(1);
-        
-                    String sql2="UPDATE party_table SET PartyName=? WHERE Party_No=? ";
-                        PreparedStatement pst2=con.prepareStatement(sql2);
-                    pst2.setString(1,PartyName2.getText().trim().toUpperCase());
-                    pst2.setInt(2,partyno);
-                    String sql3="UPDATE collection1 SET PartyName=? WHERE Party_No=?";
-                    PreparedStatement pst3=con.prepareStatement(sql3);
-                    pst3.setString(1,PartyName2.getText().trim().toUpperCase());
-                    pst3.setInt(2,partyno);
-                    pst2.executeUpdate();
-                    pst3.executeUpdate();
-                    name_combo2.removeItem(selectedItem);
-                    FillCombo();
-                    new Update_record().setVisible(true);
-                    
-    }
-                    
-    
-    
-}
-                    else{
-        new PrartyName_Repeat().setVisible(true);
-    }
-    }
-    catch(Exception e){
-            System.out.println(e.getMessage());
-        } 
-
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_update_party_name2ActionPerformed
-
     private void delete_details2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_details2ActionPerformed
 if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText().isEmpty()||amt2.getText().isEmpty()||days_decd2.getText().isEmpty()){
    new AlertBox_FieldEmpty().setVisible(true);
@@ -2171,7 +2048,7 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     DefaultTableModel model = (DefaultTableModel) col_table2.getModel();
             int row = col_table2.getSelectedRow();
             PreparedStatement pst;
@@ -2244,7 +2121,7 @@ else{// TODO add your handling code here:
         
         Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     TableModel model=col_table2.getModel();
             int row=col_table2.getSelectedRow();
             
@@ -2260,7 +2137,7 @@ else{// TODO add your handling code here:
             if(database_pk!=0){
                // System.out.println("In updation");
                 
-                query="UPDATE collection1 SET OrderDate=?,BillNumber=?,Days=?,Amount=?,RecievedDate=?,RecievedAmount=?,ExcessDays=?,GRNumber=?,GRDate=?,GRAmount=?,DaysDecided=? where SrNumber=?";
+                query="UPDATE collection1 SET OrderDate=?,BillNumber=?,Days=?,Amount=?,RecievedDate=?,RecievedAmount=?,ExcessDays=?,GRNumber=?,GRDate=?,GRAmount=?,DaysDecided=?,Outstanding=?,Agent=? where SrNumber=?";
                 pst=con.prepareStatement(query);
                 //pst.setString(1,PartyName2.getText());
                 SimpleDateFormat formatter=new  SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
@@ -2308,7 +2185,10 @@ else{// TODO add your handling code here:
                 pst.setString(10,gr_amt2.getText());
                 
                 pst.setString(11,days_decd2.getText());
-                pst.setString(12,String.valueOf(database_pk));
+                int out=Integer.parseInt(amt2.getText())-Integer.parseInt(recd_amt2.getText())-y;
+                pst.setString(12,String.valueOf(out));
+                pst.setString(13,agent_dropbox.getSelectedItem().toString());
+                pst.setString(14,String.valueOf(database_pk));
                 pst.executeUpdate();
                 show_user();
                 //FillCombo();  
@@ -2364,7 +2244,7 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
      Class.forName("com.mysql.cj.jdbc.Driver");
      Connection con;
     con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     String nameOfBill= billNo2.getText().trim().toUpperCase();
     String sqlin="select BillNumber from collection1";
     PreparedStatement pstin=con.prepareStatement(sqlin);
@@ -2386,7 +2266,7 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
         partyno=rs0.getInt(1);
     }
     System.out.println(partyno);
-    String insertQuery="insert into collection1(PartyName,Party_No,OrderDate,BillNumber,Days,Amount,RecievedDate,RecievedAmount,ExcessDays,GRNumber,GRDate,GRAmount,DaysDecided) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String insertQuery="insert into collection1(PartyName,Party_No,OrderDate,BillNumber,Days,Amount,RecievedDate,RecievedAmount,ExcessDays,GRNumber,GRDate,GRAmount,DaysDecided,Outstanding,Agent) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     PreparedStatement pst=con.prepareStatement(insertQuery);
     pst.setString(1,PartyName2.getText().trim().toUpperCase());
     pst.setInt(2,partyno);
@@ -2446,6 +2326,8 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
     gr_amt2.setText(String.valueOf(0));
      pst.setString(12,gr_amt2.getText());
     pst.setString(13,days_decd2.getText());
+    pst.setString(14,amt2.getText());
+    pst.setString(15,agent_dropbox.getSelectedItem().toString());
     pst.executeUpdate();
     new InsertedSuccessfully().setVisible(true);
     PartyName2.setText("");
@@ -2479,65 +2361,6 @@ catch(Exception e){
 
                 // TODO add your handling code here:
     }//GEN-LAST:event_insert_data2ActionPerformed
-
-    private void delete_party2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_party2ActionPerformed
-
-    try{
-    if(PartyName2.getText().isEmpty()){
-        new AlertBox_FieldEmpty().setVisible(true);
-    }
-    else{
-        
-            Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
-            //String query1="Select PartyName from collection1 where PartyName=?";
-            String query2="select PartyName from party_table where PartyName=?";
-            //PreparedStatement pst1 = con.prepareStatement(query1);
-            PreparedStatement pst2 = con.prepareStatement(query2);
-            //pst1.setString(1,name_combo2.getSelectedItem().toString());
-            pst2.setString(1,PartyName2.getText().trim().toUpperCase());
-            Object selectedItem = name_combo2.getSelectedItem();
-            //ResultSet rs1 = pst1.executeQuery();
-            ResultSet rs2 = pst2.executeQuery();
-            /*int PartyName2_index = 0;
-            ArrayList<Integer> party_data_index = new ArrayList<>();
-            while(rs1.next()){
-                party_data_index.add(rs1.getInt("Sr_no"));
-            }
-            for(int i=0; party_data_index.size() != 0 && i < party_data_index.size(); i++){
-                query1 = "delete from collections_data where `Sr_no`=?";
-                pst1 = con.prepareStatement(query1);
-                pst1.setString(1, String.valueOf(party_data_index.get(i)));
-                pst1.executeUporder_date2();
-            }*/
-            if(rs2.next()){
-                 
-                    String sql1="DELETE from collection1 WHERE PartyName=?";
-                    PreparedStatement pst1=con.prepareStatement(sql1);
-                    pst1.setString(1,PartyName2.getText().trim().toUpperCase());
-                    pst1.executeUpdate();
-                    String sql="DELETE from party_table WHERE PartyName=?";
-                        PreparedStatement pst=con.prepareStatement(sql);
-                    pst.setString(1,PartyName2.getText().trim().toUpperCase());
-                    pst.executeUpdate();
-                    
-            }
-            
-            name_combo2.removeItem(selectedItem);
-            PartyName2.setText("");
-            new Deleted_record().setVisible(true);
-        
-        
-    }
-    
-}
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }  
-// TODO add your handling code here:
-    }//GEN-LAST:event_delete_party2ActionPerformed
 
     private void recd_date2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recd_date2PropertyChange
 try{
@@ -2619,6 +2442,7 @@ reset();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PartyName2;
+    private javax.swing.JComboBox<String> agent_dropbox;
     private javax.swing.JTextField amount;
     private javax.swing.JTextField amount_tf;
     private javax.swing.JTextField amt2;
@@ -2636,7 +2460,6 @@ reset();        // TODO add your handling code here:
     private javax.swing.JTextField days_decided;
     private javax.swing.JButton delete;
     private javax.swing.JButton delete_details2;
-    private javax.swing.JButton delete_party2;
     private javax.swing.JTextField gr_amount;
     private javax.swing.JTextField gr_amt2;
     private javax.swing.JTextField gr_amt_total;
@@ -2646,7 +2469,6 @@ reset();        // TODO add your handling code here:
     private javax.swing.JTextField gr_no2;
     private javax.swing.JTextField gr_number;
     private javax.swing.JButton insert_data2;
-    private javax.swing.JButton insert_name2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -2677,6 +2499,7 @@ reset();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2703,7 +2526,6 @@ reset();        // TODO add your handling code here:
     private javax.swing.JButton update_button;
     private javax.swing.JButton update_details2;
     private javax.swing.JButton update_party;
-    private javax.swing.JButton update_party_name2;
     private javax.swing.JTextField xs_days;
     private javax.swing.JTextField xs_days2;
     // End of variables declaration//GEN-END:variables
