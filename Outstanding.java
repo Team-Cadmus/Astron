@@ -1,6 +1,8 @@
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,18 +26,20 @@ import javax.swing.table.TableColumn;
  * @author Dell
  */
 public class Outstanding extends javax.swing.JFrame {
-
+Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     /**
      * Creates new form Outstanding
      */
     public Outstanding() {
         initComponents();
-        setSize(821,700);
+        setSize(1000,700);
+        setLocation(screenSize.width/2-getWidth()/2, screenSize.height/2-getHeight()/2);
         show_user();
         jScrollPane1.getViewport().setBackground(new Color(116,121,180));
         TableCellRenderer alteredColorRenderer = new AlterColor();
         party_agent_table.setDefaultRenderer(Object.class, alteredColorRenderer);
         headerColorAndWidth();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     public final void headerColorAndWidth(){
         DefaultTableCellRenderer headerClr = new DefaultTableCellRenderer();
@@ -54,7 +58,7 @@ public class Outstanding extends javax.swing.JFrame {
         tableHeader.setOpaque(false); 
         tableHeader.setForeground(new Color(255,255,255));
         TableColumn tc1=party_agent_table.getColumnModel().getColumn(0);
-        tc1.setPreferredWidth(150);
+        tc1.setPreferredWidth(250);
         TableColumn tc2=party_agent_table.getColumnModel().getColumn(1);
         tc2.setPreferredWidth(100);
         TableColumn tc3=party_agent_table.getColumnModel().getColumn(2);
@@ -153,18 +157,17 @@ public class Outstanding extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(outstanding_total, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(refresh)))
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(outstanding_total, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(refresh)
                 .addContainerGap(118, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
