@@ -590,43 +590,26 @@ else{
     }//GEN-LAST:event_update_partyActionPerformed
 
     private void insert_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_detailsActionPerformed
-if(party_name.getText().isEmpty()||address.getText().isEmpty()||gstno.getText().isEmpty()||owner1.getText().isEmpty()||o1_m1.getText().isEmpty()||a1.getText().isEmpty()){
+if(party_name.getText().isEmpty()){
     new AlertBox_FieldEmpty().setVisible(true);
 }
-else if(!Pattern.matches("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[1-9A-Z]{1}$",gstno.getText())){
+/*else if(!Pattern.matches("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[1-9A-Z]{1}$",gstno.getText())){
     new Invalid_Format().setVisible(true);
     gstno.setText("");
     gstno.grabFocus();
-}
-else if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o1_m1.getText())){
+}*/
+/*else if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o1_m1.getText())){
         new Invalid_Format().setVisible(true);
     o1_m1.setText("");
     o1_m1.grabFocus();
-    }
-/*else if((o1_m2.getText() == null ? String.valueOf(0) != null : !o1_m2.getText().equals(String.valueOf(0)))||(o2_m1.getText() == null ? String.valueOf(0) != null : !o2_m1.getText().equals(String.valueOf(0)))||(o2_m2.getText() == null ? String.valueOf(0) != null : !o2_m2.getText().equals(String.valueOf(0)))){
-    if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o1_m2.getText())){
-        new Invalid_Format().setVisible(true);
-    o1_m2.setText("");
-    o1_m2.grabFocus();
-    }
-    if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o2_m1.getText())){
-        new Invalid_Format().setVisible(true);
-    o2_m1.setText("");
-    o2_m1.grabFocus();
-    }
-    if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o2_m2.getText())){
-        new Invalid_Format().setVisible(true);
-    o2_m2.setText("");
-    o2_m2.grabFocus();
-    }
-    
-}*/
+    }*/
+
 else{
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con;
         con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6;
+        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
     pst0.setString(1,party_name.getText().trim().toUpperCase());
@@ -639,10 +622,34 @@ else{
     String query="insert into party_details(Party_No,Address,GSTNo,owner1,o1_m1,o1_m2,owner2,o2_m1,o2_m2,agent1,agent2,agent3) values(?,?,?,?,?,?,?,?,?,?,?,?)";
     PreparedStatement pst=con.prepareStatement(query);
     pst.setInt(1,partyno);
-    pst.setString(2,address.getText().toUpperCase());
-    pst.setString(3,gstno.getText().toUpperCase());
-    pst.setString(4,owner1.getText().toUpperCase());
-    pst.setString(5,o1_m1.getText());
+    if(address.getText()==null || address.getText().equals("")){
+        empty_text0=String.valueOf(0);
+    }
+    else{
+        empty_text0=address.getText().toUpperCase();
+    }
+    if(gstno.getText()==null || gstno.getText().equals("")){
+        empty_text=String.valueOf(0);
+    }
+    else{
+        empty_text=gstno.getText().toUpperCase();
+    }
+    pst.setString(2,empty_text0);
+    pst.setString(3,empty_text);
+    if(owner1.getText()==null || owner1.getText().equals("")){
+        empty_text7=String.valueOf(0);
+    }
+    else{
+        empty_text7=owner1.getText().toUpperCase();
+    }
+    pst.setString(4,empty_text7);
+    if(o1_m1.getText()==null || o1_m1.getText().equals("")){
+        empty_text8=String.valueOf(0);
+    }
+    else{
+        empty_text8=o1_m1.getText().toUpperCase();
+    }
+    pst.setString(5,empty_text8);
     if(o1_m2.getText()== null || o1_m2.getText().equals("")){
         empty_text1=String.valueOf(0);
     }
@@ -671,7 +678,13 @@ else{
         empty_text4=o2_m2.getText();
     }
     pst.setString(9,empty_text4);
-    pst.setString(10,a1.getText().toUpperCase());
+    if(a1.getText()==null || a1.getText().equals("")){
+        empty_text9=String.valueOf(0);
+    }
+    else{
+        empty_text9=a1.getText().toUpperCase();
+    }
+    pst.setString(10,empty_text9);
     if(a2.getText()== null || a2.getText().equals("")){
         empty_text5=String.valueOf(0);
     }
@@ -801,15 +814,15 @@ try{
     }//GEN-LAST:event_deleteActionPerformed
 
     private void update_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_detailsActionPerformed
-if(party_name.getText().isEmpty()||address.getText().isEmpty()||gstno.getText().isEmpty()||owner1.getText().isEmpty()||o1_m1.getText().isEmpty()||a1.getText().isEmpty()){
+if(party_name.getText().isEmpty()){
     new AlertBox_FieldEmpty().setVisible(true);
 }
-else if(!Pattern.matches("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[1-9A-Z]{1}$",gstno.getText())){
+/*else if(!Pattern.matches("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[1-9A-Z]{1}$",gstno.getText())){
     new Invalid_Format().setVisible(true);
     gstno.setText("");
     gstno.grabFocus();
-}
-else if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o1_m1.getText())){
+}*/
+/*else if(!Pattern.matches("^[+91]{3}[7-9]{1}[0-9]{9}$",o1_m1.getText())){
         new Invalid_Format().setVisible(true);
     o1_m1.setText("");
     o1_m1.grabFocus();
@@ -831,13 +844,13 @@ else if((o1_m2.getText() == null ? String.valueOf(0) != null : !o1_m2.getText().
     o2_m2.grabFocus();
     }
     
-}
+}*/
 else{
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con;
         con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6;
+        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
     pst0.setString(1,party_name.getText().trim().toUpperCase());
@@ -849,11 +862,36 @@ else{
     System.out.println(partyno);
     String query="UPDATE party_details SET Address=?,GSTNo=?,owner1=?,o1_m1=?,o1_m2=?,owner2=?,o2_m1=?,o2_m2=?,agent1=?,agent2=?,agent3=? where Party_No=?";
     PreparedStatement pst=con.prepareStatement(query);
+     if(address.getText()==null || address.getText().equals("")){
+        empty_text0=String.valueOf(0);
+    }
+    else{
+        empty_text0=address.getText().toUpperCase();
+    }
+    pst.setString(1,empty_text0);
+    if(gstno.getText()==null || gstno.getText().equals("")){
+        empty_text=String.valueOf(0);
+    }
+    else{
+        empty_text=gstno.getText().toUpperCase();
+    }
+    pst.setString(2,empty_text);
+    if(owner1.getText()==null || owner1.getText().equals("")){
+        empty_text7=String.valueOf(0);
+    }
+    else{
+        empty_text7=owner1.getText().toUpperCase();
+    }
     
-    pst.setString(1,address.getText().toUpperCase());
-    pst.setString(2,gstno.getText().toUpperCase());
-    pst.setString(3,owner1.getText().toUpperCase());
-    pst.setString(4,o1_m1.getText());
+    if(o1_m1.getText()==null || o1_m1.getText().equals("")){
+        empty_text8=String.valueOf(0);
+    }
+    else{
+        empty_text8=o1_m1.getText().toUpperCase();
+    }
+    
+    pst.setString(3,empty_text7);
+    pst.setString(4,empty_text8);
     if(o1_m2.getText()== null || o1_m2.getText().equals("")){
         empty_text1=String.valueOf(0);
     }
@@ -882,7 +920,13 @@ else{
         empty_text4=o2_m2.getText();
     }
     pst.setString(8,empty_text4);
-    pst.setString(9,a1.getText().toUpperCase());
+    if(a1.getText()==null || a1.getText().equals("")){
+        empty_text9=String.valueOf(0);
+    }
+    else{
+        empty_text9=a1.getText().toUpperCase();
+    }
+    pst.setString(9,empty_text9);
     if(a2.getText()== null || a2.getText().equals("")){
         empty_text5=String.valueOf(0);
     }
