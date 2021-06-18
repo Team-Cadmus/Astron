@@ -104,6 +104,10 @@ o2_m2.setText("");
 a1.setText("");
 a2.setText("");
 a3.setText("");
+email1.setText("");
+email2.setText("");
+website1.setText("");
+website2.setText("");
     
 }
 public void show_user() {
@@ -124,7 +128,7 @@ public void show_user() {
     while(rs.next()){
         partyno=rs.getInt(1);
     }
-    String sql1="SELECT Address,GSTNo,owner1,o1_m1,o1_m2,owner2,o2_m1,o2_m2,agent1,agent2,agent3 from party_details where Party_No=?";
+    String sql1="SELECT Address,GSTNo,owner1,o1_m1,o1_m2,owner2,o2_m1,o2_m2,agent1,agent2,agent3,email1,email2,website1,website2 from party_details where Party_No=?";
     PreparedStatement pst1=con.prepareStatement(sql1);
     pst1.setInt(1, partyno);
     ResultSet rs1=pst1.executeQuery();
@@ -169,6 +173,30 @@ public void show_user() {
         }
         else{
             a3.setText(rs1.getString("agent3"));
+        }
+        if(rs1.getString("email1")==null||rs1.getString("email1").equals("")){
+            email1.setText("");
+        }
+        else{
+            email1.setText(rs1.getString("email1"));
+        }
+        if(rs1.getString("email2")==null||rs1.getString("email2").equals("")){
+            email2.setText("");
+        }
+        else{
+            email2.setText(rs1.getString("email2"));
+        }
+        if(rs1.getString("website1")==null||rs1.getString("website1").equals("")){
+            website1.setText("");
+        }
+        else{
+            website1.setText(rs1.getString("website1"));
+        }
+        if(rs1.getString("website2")==null||rs1.getString("website2").equals("")){
+            website2.setText("");
+        }
+        else{
+            website2.setText(rs1.getString("website2"));
         }
         
     }
@@ -218,6 +246,14 @@ public void show_user() {
         reset = new javax.swing.JButton();
         insert_name = new javax.swing.JButton();
         update_details = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        email1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        email2 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        website1 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        website2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -368,6 +404,30 @@ public void show_user() {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("email 1:");
+
+        email1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("email 2:");
+
+        email2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("website1:");
+
+        website1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("website2:");
+
+        website2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -414,11 +474,29 @@ public void show_user() {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(18, 18, 18)
-                                        .addComponent(o2_m2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(o2_m2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(website1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(email1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(website2))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(999, Short.MAX_VALUE))
+                        .addContainerGap(909, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -432,7 +510,7 @@ public void show_user() {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(namecombo, 0, 220, Short.MAX_VALUE)
                                     .addComponent(party_name))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 114, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 263, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(insert_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(insert_details, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -444,7 +522,7 @@ public void show_user() {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(delete, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(672, Short.MAX_VALUE))))))
+                                .addContainerGap(819, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,21 +563,29 @@ public void show_user() {
                     .addComponent(jLabel4)
                     .addComponent(owner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(o1_m1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(o1_m1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(email1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(o1_m2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(o1_m2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(owner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(o2_m1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(o2_m1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(website1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(o2_m2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(o2_m2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(website2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -609,7 +695,7 @@ else{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con;
         con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9;
+        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9,empty_text10,empty_text11,empty_text12,empty_text13;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
     pst0.setString(1,party_name.getText().trim().toUpperCase());
@@ -619,7 +705,7 @@ else{
         partyno=rs0.getInt(1);
     }
     System.out.println(partyno);
-    String query="insert into party_details(Party_No,Address,GSTNo,owner1,o1_m1,o1_m2,owner2,o2_m1,o2_m2,agent1,agent2,agent3) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+    String query="insert into party_details(Party_No,Address,GSTNo,owner1,o1_m1,o1_m2,owner2,o2_m1,o2_m2,agent1,agent2,agent3,email1,email2,website1,website2) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     PreparedStatement pst=con.prepareStatement(query);
     pst.setInt(1,partyno);
     if(address.getText()==null || address.getText().equals("")){
@@ -698,7 +784,36 @@ else{
     else{
         empty_text6=a3.getText().toUpperCase();
     }
+    if(email1.getText()== null || email1.getText().equals("")){
+        empty_text10=String.valueOf(0);
+    }
+    else{
+        empty_text10=email1.getText().toUpperCase();
+    }
+    if(email2.getText()== null || email2.getText().equals("")){
+        empty_text11=String.valueOf(0);
+    }
+    else{
+        empty_text11=email2.getText().toUpperCase();
+    }
+    if(website1.getText()== null || website1.getText().equals("")){
+        empty_text12=String.valueOf(0);
+    }
+    else{
+        empty_text12=website1.getText().toUpperCase();
+    }
+    if(website2.getText()== null || website2.getText().equals("")){
+        empty_text13=String.valueOf(0);
+    }
+    else{
+        empty_text13=website2.getText().toUpperCase();
+    }
     pst.setString(12,empty_text6);
+    pst.setString(13,empty_text10);
+    pst.setString(14,empty_text11);
+    pst.setString(15,empty_text12);
+    pst.setString(16,empty_text13);
+    
     pst.executeUpdate();
     new InsertedSuccessfully().setVisible(true);
     reset();
@@ -850,7 +965,7 @@ else{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con;
         con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9;
+        String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9,empty_text10,empty_text11,empty_text12,empty_text13;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
     pst0.setString(1,party_name.getText().trim().toUpperCase());
@@ -860,7 +975,7 @@ else{
         partyno=rs0.getInt(1);
     }
     System.out.println(partyno);
-    String query="UPDATE party_details SET Address=?,GSTNo=?,owner1=?,o1_m1=?,o1_m2=?,owner2=?,o2_m1=?,o2_m2=?,agent1=?,agent2=?,agent3=? where Party_No=?";
+    String query="UPDATE party_details SET Address=?,GSTNo=?,owner1=?,o1_m1=?,o1_m2=?,owner2=?,o2_m1=?,o2_m2=?,agent1=?,agent2=?,agent3=?,email1=?,email2=?,website1=?,website2=? where Party_No=?";
     PreparedStatement pst=con.prepareStatement(query);
      if(address.getText()==null || address.getText().equals("")){
         empty_text0=String.valueOf(0);
@@ -941,7 +1056,35 @@ else{
         empty_text6=a3.getText().toUpperCase();
     }
     pst.setString(11,empty_text6);
-    pst.setInt(12,partyno);
+    if(email1.getText()== null || email1.getText().equals("")){
+        empty_text10=String.valueOf(0);
+    }
+    else{
+        empty_text10=email1.getText().toUpperCase();
+    }
+    pst.setString(12,empty_text10);
+    if(email2.getText()== null || email2.getText().equals("")){
+        empty_text11=String.valueOf(0);
+    }
+    else{
+        empty_text11=email2.getText().toUpperCase();
+    }
+    pst.setString(13,empty_text11);
+    if(website1.getText()== null || website1.getText().equals("")){
+        empty_text12=String.valueOf(0);
+    }
+    else{
+        empty_text12=website1.getText().toUpperCase();
+    }
+    pst.setString(14,empty_text12);
+    if(website2.getText()== null || website2.getText().equals("")){
+        empty_text13=String.valueOf(0);
+    }
+    else{
+        empty_text13=website2.getText().toUpperCase();
+    }
+    pst.setString(15,empty_text13);
+    pst.setInt(16,partyno);
     pst.executeUpdate();
     new Update_record().setVisible(true);
     reset();
@@ -1016,11 +1159,17 @@ if(namecombo.getSelectedItem().toString().isEmpty()==false){
     private javax.swing.JTextField a3;
     private javax.swing.JTextArea address;
     private javax.swing.JButton delete;
+    private javax.swing.JTextField email1;
+    private javax.swing.JTextField email2;
     private javax.swing.JTextField gstno;
     private javax.swing.JButton insert_details;
     private javax.swing.JButton insert_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1042,6 +1191,8 @@ if(namecombo.getSelectedItem().toString().isEmpty()==false){
     private javax.swing.JButton reset;
     private javax.swing.JButton update_details;
     private javax.swing.JButton update_party;
+    private javax.swing.JTextField website1;
+    private javax.swing.JTextField website2;
     // End of variables declaration//GEN-END:variables
 
     
