@@ -1,11 +1,14 @@
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -26,13 +29,14 @@ import javax.swing.ListCellRenderer;
  * @author Dell
  */
 public class PartyDisplay extends javax.swing.JFrame {
-
+ArrayList agentnames=new ArrayList();
     /**
      * Creates new form PartyDisplay
      */
     public PartyDisplay() {
         initComponents();
         FillCombo();
+        //DatabaseName2();
         namecombo.setRenderer(new PartyDisplay.Demo(namecombo.getRenderer()));
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -345,10 +349,40 @@ public void show_user() {
         jLabel10.setText("Agents:");
 
         a1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        a1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                a1MouseClicked(evt);
+            }
+        });
+        a1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                a1KeyPressed(evt);
+            }
+        });
 
         a3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        a3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                a3MouseClicked(evt);
+            }
+        });
+        a3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                a3KeyPressed(evt);
+            }
+        });
 
         a2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        a2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                a2MouseClicked(evt);
+            }
+        });
+        a2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                a2KeyPressed(evt);
+            }
+        });
 
         insert_details.setBackground(new java.awt.Color(255, 138, 115));
         insert_details.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
@@ -450,14 +484,10 @@ public void show_user() {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(a3)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -476,36 +506,36 @@ public void show_user() {
                                         .addGap(18, 18, 18)
                                         .addComponent(o2_m2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(33, 33, 33)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel13)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(website1))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addGap(40, 40, 40)
+                                            .addComponent(email1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel14)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(website2)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(website1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(email1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(website2))))
+                                        .addGap(43, 43, 43)
+                                        .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(909, Short.MAX_VALUE))
+                                .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(a3, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(910, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(namecombo, 0, 220, Short.MAX_VALUE)
@@ -522,7 +552,10 @@ public void show_user() {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(delete, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(819, Short.MAX_VALUE))))))
+                                .addContainerGap(819, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,16 +603,16 @@ public void show_user() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(o1_m2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(website1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(owner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(o2_m1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(website1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12)
+                    .addComponent(email2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -590,10 +623,9 @@ public void show_user() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(a3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(a2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(a3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1118,6 +1150,75 @@ if(namecombo.getSelectedItem().toString().isEmpty()==false){
         // TODO add your handling code here:
     }//GEN-LAST:event_o1_m2ActionPerformed
 
+    private void a1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_a1KeyPressed
+switch(evt.getKeyCode()){
+            case KeyEvent.VK_BACK_SPACE:
+                break;
+            case KeyEvent.VK_ENTER:
+                a1.setText(a1.getText().toUpperCase());
+                break;
+            default:
+                EventQueue.invokeLater(new Runnable(){
+                    @Override
+            public void run() {
+                String txt=a1.getText().toUpperCase();
+                autocomplete(txt);//To change body of generated methods, choose Tools | Templates.
+            }
+                    
+                });
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_a1KeyPressed
+
+    private void a2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_a2KeyPressed
+switch(evt.getKeyCode()){
+            case KeyEvent.VK_BACK_SPACE:
+                break;
+            case KeyEvent.VK_ENTER:
+                a2.setText(a2.getText().toUpperCase());
+                break;
+            default:
+                EventQueue.invokeLater(new Runnable(){
+                    @Override
+            public void run() {
+                String txt=a2.getText().toUpperCase();
+                autocomplete2(txt);//To change body of generated methods, choose Tools | Templates.
+            }
+                    
+                });
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_a2KeyPressed
+
+    private void a3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_a3KeyPressed
+switch(evt.getKeyCode()){
+            case KeyEvent.VK_BACK_SPACE:
+                break;
+            case KeyEvent.VK_ENTER:
+                a3.setText(a3.getText().toUpperCase());
+                break;
+            default:
+                EventQueue.invokeLater(new Runnable(){
+                    @Override
+            public void run() {
+                String txt=a3.getText().toUpperCase();
+                autocomplete3(txt);//To change body of generated methods, choose Tools | Templates.
+            }
+                    
+                });
+        }              // TODO add your handling code here:
+    }//GEN-LAST:event_a3KeyPressed
+
+    private void a1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a1MouseClicked
+DatabaseName2();        // TODO add your handling code here:
+    }//GEN-LAST:event_a1MouseClicked
+
+    private void a2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a2MouseClicked
+DatabaseName2();        // TODO add your handling code here:
+    }//GEN-LAST:event_a2MouseClicked
+
+    private void a3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a3MouseClicked
+DatabaseName2();        // TODO add your handling code here:
+    }//GEN-LAST:event_a3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1194,6 +1295,94 @@ if(namecombo.getSelectedItem().toString().isEmpty()==false){
     private javax.swing.JTextField website1;
     private javax.swing.JTextField website2;
     // End of variables declaration//GEN-END:variables
-
+public void DatabaseName2(){
+    try{
+        
+        Class.forName("com.mysql.cj.jdbc.Driver");
+     Connection con;
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    String query="select agent1,agent2,agent3 from party_details ";
+    java.sql.Statement pst=con.createStatement();
+    ResultSet rs=pst.executeQuery(query);
+    while(rs.next()){
+        String name1=rs.getString("agent1");
+        String name2=rs.getString("agent2");
+        String name3=rs.getString("agent3");
+         if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
+        agentnames.add(name1);
+        }
+         if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
+        agentnames.add(name2);
+        }
+         if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
+        agentnames.add(name3);
+        }
+    }
+    }
+    catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    
+}
+public void autocomplete(String txt){
+    String complete="";
+    int start=txt.length();
+    int end=txt.length();
+    int a;
+    for(a=0;a<agentnames.size();a++){
+        if(agentnames.get(a).toString().toUpperCase().startsWith(txt)){
+          complete=agentnames.get(a).toString().toUpperCase();
+          end=complete.length();
+          break;
+        }
+    }
+    if(end>start){
+        a1.setText(complete);
+        a1.setCaretPosition(end);
+        a1.moveCaretPosition(start);
+         
+    }
+    
+}
+public void autocomplete2(String txt){
+    String complete="";
+    int start=txt.length();
+    int end=txt.length();
+    int a;
+    for(a=0;a<agentnames.size();a++){
+        if(agentnames.get(a).toString().toUpperCase().startsWith(txt)){
+          complete=agentnames.get(a).toString().toUpperCase();
+          end=complete.length();
+          break;
+        }
+    }
+    if(end>start){
+        a2.setText(complete);
+        a2.setCaretPosition(end);
+        a2.moveCaretPosition(start);
+         
+    }
+    
+}
+public void autocomplete3(String txt){
+    String complete="";
+    int start=txt.length();
+    int end=txt.length();
+    int a;
+    for(a=0;a<agentnames.size();a++){
+        if(agentnames.get(a).toString().toUpperCase().startsWith(txt)){
+          complete=agentnames.get(a).toString().toUpperCase();
+          end=complete.length();
+          break;
+        }
+    }
+    if(end>start){
+        a3.setText(complete);
+        a3.setCaretPosition(end);
+        a3.moveCaretPosition(start);
+         
+    }
+    
+}
     
 }
