@@ -11,8 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -23,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Document;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -234,6 +237,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         back = new javax.swing.JButton();
         update_design_button = new javax.swing.JButton();
         update_design = new javax.swing.JTextField();
+        save_pdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Display");
@@ -356,6 +360,17 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         jPanel1.add(update_design);
         update_design.setBounds(680, 590, 229, 34);
 
+        save_pdf.setBackground(new java.awt.Color(255, 138, 115));
+        save_pdf.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
+        save_pdf.setText("print");
+        save_pdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_pdfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(save_pdf);
+        save_pdf.setBounds(680, 640, 230, 37);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -476,13 +491,26 @@ else if(update_design.getText()!=""){
             new Update_record().setVisible(true);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            e.getMessage();
         }     
 
 
 }
 // TODO add your handling code here:        // TODO add your handling code here:
     }//GEN-LAST:event_update_design_buttonActionPerformed
+
+    private void save_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_pdfActionPerformed
+
+                MessageFormat header=new MessageFormat(base.getSelectedItem().toString().toUpperCase());
+        try{
+           brp_table.print(JTable.PrintMode.FIT_WIDTH,header,null); 
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_save_pdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -535,6 +563,7 @@ else if(update_design.getText()!=""){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField milltotal;
     private javax.swing.JTextField rmstotal;
+    private javax.swing.JButton save_pdf;
     private javax.swing.JTextField update_design;
     private javax.swing.JButton update_design_button;
     // End of variables declaration//GEN-END:variables
