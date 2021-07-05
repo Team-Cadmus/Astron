@@ -486,6 +486,34 @@ show_user();        // TODO add your handling code here:
         paymentDays.setText("");
         rate.setText("");
     }
+     private void updateActionPerformed(java.awt.event.ActionEvent evt) {                                       
+          try{  
+       Class.forName("com.mysql.cj.jdbc.Driver");
+     Connection con;
+    con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+           
+             String query="Update order_details SET PartyName=?, Date=?, `Design`=?,Quality=?,sarees=?,parcels=? where SrNumber=?";
+             PreparedStatement pst=con.prepareStatement(query);
+             pst=con.prepareStatement(query);
+             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            java.util.Date d3=date.getDate();
+            String newDate3=formatter.format(d3);
+            TableModel model=displayTable.getModel();
+             int row=displayTable.getSelectedRow();
+            pst.setString(1,name_combo2.getSelectedItem().toString());
+            pst.setString(2,newDate3);
+            pst.setString(3,model.getValueAt(row,3).toString());
+            pst.setString(4,model.getValueAt(row,1).toString());
+            pst.setString(5,model.getValueAt(row,4).toString());
+            pst.setString(6,model.getValueAt(row,5).toString());
+            pst.setString(7,model.getValueAt(row,2).toString());
+            pst.executeUpdate();
+//new InsertedSuccessfully().setVisible(true);
+    }        catch(Exception e){
+                    System.out.println(e.getMessage());     
+         }        // TODO add your handling code here:
+    } 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
