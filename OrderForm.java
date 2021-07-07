@@ -137,6 +137,11 @@ public class OrderForm extends javax.swing.JFrame {
         });
 
         update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
 
         delete.setText("Delete");
         delete.addActionListener(new java.awt.event.ActionListener() {
@@ -361,7 +366,7 @@ try{
     String SelectedBase=base.getSelectedItem().toString();
     String party=name_combo2.getSelectedItem().toString();
     String agent=agent_dropbox.getSelectedItem().toString();
-    if(i_want_to.getSelectedIndex()==0){
+    if(i_want_to.getSelectedIndex()==1){
     String query1="insert into order_form(Date,PartyName,Agent_name,form_no,payment_days,rate,sareesParcels,Quality) values (?,?,?,?,?,?,?,?)";
     PreparedStatement pst1=con.prepareStatement(query1);
     pst1.setString(1,newDate3);
@@ -374,7 +379,7 @@ try{
     pst1.setString(8,SelectedBase);
     pst1.executeUpdate();
     }
-    else if(i_want_to.getSelectedIndex()==1){
+    else if(i_want_to.getSelectedIndex()==0){
     int rows=displayTable.getRowCount();
     //System.out.println(rows);
     for(int row=0;row<rows;row++){
@@ -518,6 +523,36 @@ else if(i_want_to.getSelectedIndex()==4){
     show_date_quality_user();
 }// TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+try{  
+       Class.forName("com.mysql.cj.jdbc.Driver");
+     Connection con;
+    con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+           TableModel model=displayTable.getModel();
+             String query="Update order_details SET Design=?,sarees=?,parcels=? where PartyName=? and Date=? and SrNumber=? and Quality=?";
+             PreparedStatement pst=con.prepareStatement(query);
+             /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            java.util.Date d3=date.getDate();
+            String newDate3=formatter.format(d3);*/
+            
+             int row=displayTable.getSelectedRow();
+             System.out.print(row);
+           
+            pst.setString(1,model.getValueAt(row,3).toString().trim());
+            pst.setString(2,model.getValueAt(row,4).toString().trim());
+            pst.setString(3,model.getValueAt(row,5).toString().trim());
+            pst.setString(4,name_combo2.getSelectedItem().toString());
+            pst.setString(5,model.getValueAt(row,0).toString());
+            pst.setString(6,model.getValueAt(row,2).toString().trim());
+            pst.setString(7,model.getValueAt(row,1).toString().trim());
+            pst.executeUpdate();
+new Update_record().setVisible(true);
+    }        catch(Exception e){
+                    System.out.println(e.getMessage());     
+         }           // TODO add your handling code here:
+    }//GEN-LAST:event_updateActionPerformed
 public ArrayList<orderDetails> date_quality_specific_order(){
         ArrayList<orderDetails> orderList3=new ArrayList<orderDetails>();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
@@ -539,7 +574,7 @@ public ArrayList<orderDetails> date_quality_specific_order(){
     java.util.Date d3=date.getDate();
     String newDate3=formatter.format(d3);
     //System.out.print(newDate3);
-    String query="select * from order_details od NATURAL JOIN order_form of WHERE (od.PartyName=?) and (od.Date=?) and (od.Quality=?)";
+    String query="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName=?) and (od.Date=?) and (od.Quality=?) and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
     
     PreparedStatement pst=con.prepareStatement(query);
    
