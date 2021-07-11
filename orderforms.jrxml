@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3934543-895d-4be0-8a3b-3feb16390deb">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="465"/>
+	<queryString language="SQL">
+	</queryString>
+	<field name="field1" class="java.lang.String"/>
+	<variable name="formNo" class="java.lang.String"/>
+	<variable name="date" class="java.lang.String"/>
+	<variable name="sareesParcels" class="java.lang.String"/>
+	<variable name="paymentDays" class="java.lang.String"/>
+	<variable name="base" class="java.lang.String"/>
+	<variable name="party" class="java.lang.String"/>
+	<variable name="rate" class="java.lang.String"/>
+	<variable name="totalSarees" class="java.lang.String"/>
+	<variable name="totalParcels" class="java.lang.String"/>
+	<variable name="agent" class="java.lang.String"/>
+	<variable name="SrNumber" class="java.lang.String"/>
+	<variable name="design" class="java.lang.String"/>
+	<variable name="sarees" class="java.lang.String"/>
+	<variable name="parcels" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1b4c32d4-d181-4994-b78d-5b58666e2b84" x="169" y="0" width="190" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:SHREE GANESHAYA NAMAH:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7530f5b-fa38-45ab-9094-6821fadb8939" x="176" y="20" width="183" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[HEMAL SURAJRAM JARIWALA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a9984ef-be08-4329-840d-10b9d081921c" x="186" y="40" width="166" height="20"/>
+				<textElement/>
+				<text><![CDATA[C/O: JARIWALA TRADING CO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="115e6beb-9710-4a1f-85a2-11a6c6eb8548" x="176" y="58" width="173" height="20"/>
+				<textElement/>
+				<text><![CDATA[HEMAL SURAJRAM JARIWALA HUF]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="479ade8c-5e53-402e-ab28-c515b0d08da7" x="140" y="15" width="257" height="20"/>
+				<textElement/>
+				<text><![CDATA[PLOT NO.: 114 TO 116,S.K.INDUSTRIAL SOCIETY - 3,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="feaedcfb-f084-4f6f-b80c-6461e47e3016" x="189" y="0" width="170" height="20"/>
+				<textElement/>
+				<text><![CDATA[MAHALAXMI TEX - O - FAB]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fe6ff0a4-fb37-4ed3-9b36-0fb44577e8cd" x="124" y="6" width="289" height="20"/>
+				<textElement/>
+				<text><![CDATA[NEAR KOMAL INTERNATIONAL CIRCLE, BAMROLI ROAD,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3eaf75e2-facc-4367-900d-8aa25056eca5" x="186" y="26" width="221" height="20"/>
+				<textElement/>
+				<text><![CDATA[SURAT - 395002.GUJARAT.INDIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="504" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="db6f3816-0775-40df-9fd2-5f4f1c28eba5" x="0" y="0" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[ MOBILE NO.:     98251 12259]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5bae9bc1-cd19-4bbd-af27-1c1108ce9814" x="0" y="20" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[LANDLINE NO.:+91261 - 263007]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f25cb5c-6d3c-4dfe-b996-3bce2949508b" x="0" y="40" width="189" height="20"/>
+				<textElement/>
+				<text><![CDATA[WEBSITE: jariwalatradingco.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="698f0448-3530-488a-93b1-85ec568fff1f" x="0" y="80" width="30" height="20"/>
+				<textElement/>
+				<text><![CDATA[DATE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93a0fcaa-eacd-4f89-ad66-e63410fbe326" x="0" y="100" width="40" height="20"/>
+				<textElement/>
+				<text><![CDATA[PARTY: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="124038bd-f616-4163-bba0-dfdbd437721c" x="352" y="0" width="180" height="20"/>
+				<textElement/>
+				<text><![CDATA[   EMAIL:     jariwalahemal@yahhoo.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bf34a657-10a1-4250-8481-c26e32d69add" x="404" y="20" width="151" height="20"/>
+				<textElement/>
+				<text><![CDATA[hemaljari100@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d68a9218-40d5-44d7-9307-ed1f00b5a32c" x="342" y="80" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[ORDER FORM NO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e6ba07-0648-469e-a366-e6f206294788" x="342" y="100" width="39" height="20"/>
+				<textElement/>
+				<text><![CDATA[AGENT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bcbc58f0-1797-4bbc-9b0a-2a621ae9fb57" x="0" y="131" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[QUALITY:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eefa991f-fbe3-4d49-bf7d-32861ef38ee5" x="153" y="355" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[TOTAL PARCELS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e1fceca-b701-4c70-9549-de3eb9258093" x="153" y="375" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[TOTAL SAREES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e97566ca-0b7b-46b2-b7a0-b2df8c1c0aec" x="404" y="375" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[@]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e1237a2-5094-4636-a07d-2d7ea7ece060" x="153" y="395" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[RATE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9104226f-5906-4f8a-b44a-b91259026d40" x="0" y="415" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[PAYMENT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9da6ea28-a516-49ec-a08e-9e60c596d0f8" x="397" y="415" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[AUTHORIZED SIGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="846fe676-a06e-4dff-8828-4340d1709ee9" x="381" y="484" width="123" height="20"/>
+				<textElement/>
+				<text><![CDATA[MR. HEMAL JARIWALA]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8d267fb7-55cf-4cf6-8bdc-175a4c63b8f3" x="442" y="80" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{formNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3b1491e-560f-4ae4-843b-15a7451f5a22" x="40" y="80" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b595fb0f-c5f0-4821-a847-e64e62679c9d" x="432" y="375" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{sareesParcels}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78587f27-b3e2-4884-8f97-da5cc298bed6" x="53" y="415" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{paymentDays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bd87481c-52b0-499e-900a-7dc010bf7a8e" x="53" y="131" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{base}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="11983872-2cbf-416a-b766-334bb0f5fe3e" x="40" y="100" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{party}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e035b2d-f0d8-41a5-afe9-5c13085dece4" x="242" y="395" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b895f80f-dbc5-449a-866a-5c6c9b0fae09" x="242" y="375" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{totalSarees}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="734e483e-23c4-435a-9264-ae6907e4db21" x="242" y="355" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{totalParcels}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56cfd6da-c0f4-4a27-b3b1-4636ace888d9" x="381" y="100" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{agent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="355da8db-301b-4059-b5be-cad2641144dc" x="18" y="164" width="64" height="20"/>
+				<textElement/>
+				<text><![CDATA[SR.NO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7887464f-19aa-4ba1-853b-d9d75cbd2d7e" x="124" y="164" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[DESIGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a444997-1b6e-4c45-99a5-412c4051a5a1" x="270" y="164" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[SAREES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e9326ea-e2c7-4be2-b358-987ff25c028a" x="397" y="164" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[PARCELS]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e54d04be-9ac3-48c7-a77f-e915c41a5b55" x="18" y="184" width="76" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{SrNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="95920415-83a8-463f-a5d2-471e4e9a84c6" x="124" y="184" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{design}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ac852002-d39d-4e88-ba00-efc3d5c3e2c3" x="270" y="184" width="89" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{sarees}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22d8be0f-66e6-47c0-a437-86af5aabb3b3" x="397" y="184" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{parcels}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8d2e344d-d9d8-4abb-a43a-4c567c73a8fb" x="140" y="0" width="302" height="20"/>
+				<textElement/>
+				<text><![CDATA[QUALITY IS NEVER EXPENSIVE, IT'S PRICELESS.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

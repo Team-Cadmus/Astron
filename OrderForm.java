@@ -6,12 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +44,7 @@ public class OrderForm extends javax.swing.JFrame {
      */
     public OrderForm() {
         initComponents();
-         FillAgentCombo();
+        FillAgentCombo();
          FillCombo();
        
     }
@@ -158,6 +172,11 @@ public class OrderForm extends javax.swing.JFrame {
         });
 
         pdf.setText("Create PDF ");
+        pdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pdfActionPerformed(evt);
+            }
+        });
 
         insertRow.setText("Insert Row");
         insertRow.addActionListener(new java.awt.event.ActionListener() {
@@ -553,6 +572,67 @@ new Update_record().setVisible(true);
                     System.out.println(e.getMessage());     
          }           // TODO add your handling code here:
     }//GEN-LAST:event_updateActionPerformed
+
+    private void pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfActionPerformed
+      try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+     Connection con;
+    con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+          java.util.Date d3=date.getDate();
+          String SelectedBase=name_combo2.getSelectedItem().toString();
+    String quality=base.getSelectedItem().toString();
+          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    String newDate3=formatter.format(d3);
+        JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");  
+        String query="select * from order_form where Date='"+newDate3+"' and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
+        String query2="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
+       
+       //pst2.executeQuery();
+JRDesignQuery newQuery=new JRDesignQuery();
+        newQuery.setText(query2);
+        jd.setQuery(newQuery);
+        
+        HashMap<String,Object> para = new HashMap<>();
+        PreparedStatement pst=con.prepareStatement(query);
+                ResultSet rs=pst.executeQuery();
+                int form_no=0,payment_days=0,sareesParcels=0;
+                String agent_name="",rate="";
+                while(rs.next()){
+                    form_no=rs.getInt("form_no");
+                    payment_days=rs.getInt("payment_days");
+                    sareesParcels=rs.getInt("sareesParcels");
+                    agent_name=rs.getString("Agent_name");
+                    rate=rs.getString("rate");
+                }
+                System.out.print(form_no);
+                para.put("formNo",form_no);
+                para.put("paymentDays",payment_days);
+                para.put("sareesParcels",sareesParcels);
+                para.put("agent",agent_name);
+                para.put("rate",rate);
+                para.put("party",name_combo2.getSelectedItem().toString());
+                para.put("date",date.getDate());
+                para.put("base",base.getSelectedItem().toString());
+                para.put("totalSarees",totalSarees.getText());
+                para.put("totalParcels",totalParcels.getText());
+                
+                JasperReport js=JasperCompileManager.compileReport(jd);
+                JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
+                JasperViewer.viewReport(jPrint);
+      }
+      catch(Exception e){
+                    System.out.println(e.getMessage());     
+         }    
+        
+        
+        
+        
+ 
+        
+        
+        
+    }//GEN-LAST:event_pdfActionPerformed
 public ArrayList<orderDetails> date_quality_specific_order(){
         ArrayList<orderDetails> orderList3=new ArrayList<orderDetails>();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
@@ -726,13 +806,15 @@ public void show_date_quality_user(){
     totalSarees.setText(String.valueOf(total_sarees));
    totalParcels.setText(String.valueOf(total_parcels));
     }
+    public void sortarraylist(){
+        ArrayList<agents> list =getAgents();
+        
+        
+    }
     
-    public void FillAgentCombo(){
+    public ArrayList<agents> getAgents(){
+        ArrayList<agents> AgentList=new ArrayList<>();
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
-    boolean added;
-    int count=0;
-    int compare=0;
-    Object obj;
     model.setSelectedItem("---select agent---");
     try{
          
@@ -742,35 +824,23 @@ public void show_date_quality_user(){
      Connection con;
     con = DriverManager.getConnection(
             "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    
-    String sql="select DISTINCT agent1,agent2,agent3 from party_details";
-    PreparedStatement pst=con.prepareStatement(sql);
+    String query="select DISTINCT agent1,agent2,agent3 from party_details";
+    agents ag;
+    PreparedStatement pst=con.prepareStatement(query);
     ResultSet rs=pst.executeQuery();
     while(rs.next()){
-        added=false;
-        String name1=rs.getString("agent1");
-        String name2=rs.getString("agent2");
-        String name3=rs.getString("agent3");
-        count=agent_dropbox.getItemCount();
-        if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
-        model.addElement(name1);
-        }
-                if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
-
-        model.addElement(name2);
-                }
-                        if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
-
-        model.addElement(name3);
-                        }
+        ag=new agents(rs.getString("agent1"),rs.getString("agent2"),rs.getString("agent3"));
+        AgentList.add(ag);
     }
-    agent_dropbox.setModel(model);
-    //con.close();
-    //pst.close();
+    
+    
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
         }
+   
+ 
+    return AgentList;
 }
 public void FillCombo(){
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
@@ -818,6 +888,49 @@ public void FillCombo(){
             System.out.println(e.getMessage());
         }
     }
+    public void FillAgentCombo(){
+    DefaultComboBoxModel model = new DefaultComboBoxModel(); 
+
+    model.setSelectedItem("---select agent---");
+    try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con;
+        con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+
+        String sql="select DISTINCT agent1,agent2,agent3 from party_details";
+        PreparedStatement pst=con.prepareStatement(sql);
+        ResultSet rs=pst.executeQuery();
+        Set<String> agentNames = new HashSet<>();
+        while(rs.next()){
+            String name1=rs.getString("agent1");
+            String name2=rs.getString("agent2");
+            String name3=rs.getString("agent3");
+            if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
+                agentNames.add(name1);
+            }
+            if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
+                agentNames.add(name2);
+            }
+            if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
+                agentNames.add(name3);
+            }
+        }
+        ArrayList<String> agentList = new ArrayList<>(agentNames);
+        java.util.Collections.sort(agentList);
+//      for(String agent: agentList)
+//          System.out.println(agent);
+        for(String agent: agentList){
+            model.addElement(agent);
+        }
+        agent_dropbox.setModel(model);
+    //con.close();
+    //pst.close();
+    }
+    catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -887,4 +1000,6 @@ public void FillCombo(){
     private javax.swing.JTextField totalSarees;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
+
+    
 }
