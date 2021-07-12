@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -46,6 +47,7 @@ public class OrderForm extends javax.swing.JFrame {
         initComponents();
         FillAgentCombo();
          FillCombo();
+         
        
     }
 
@@ -587,6 +589,7 @@ new Update_record().setVisible(true);
         JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");  
         String query="select * from order_form where Date='"+newDate3+"' and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
         String query2="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
+ String query3="select SUM(sarees),SUM(parcels) from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";       
        
        //pst2.executeQuery();
 JRDesignQuery newQuery=new JRDesignQuery();
@@ -595,9 +598,17 @@ JRDesignQuery newQuery=new JRDesignQuery();
         
         HashMap<String,Object> para = new HashMap<>();
         PreparedStatement pst=con.prepareStatement(query);
+        PreparedStatement pst3=con.prepareStatement(query3);
                 ResultSet rs=pst.executeQuery();
-                int form_no=0,payment_days=0,sareesParcels=0;
+                ResultSet rs3=pst3.executeQuery();
+                int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0;
                 String agent_name="",rate="";
+                while(rs3.next()){
+                    totalSarees=rs3.getInt(1);
+                    totalParcels=rs3.getInt(2);
+                }
+                System.out.println(totalSarees);
+                System.out.println(totalParcels);
                 while(rs.next()){
                     form_no=rs.getInt("form_no");
                     payment_days=rs.getInt("payment_days");
@@ -606,20 +617,21 @@ JRDesignQuery newQuery=new JRDesignQuery();
                     rate=rs.getString("rate");
                 }
                 System.out.print(form_no);
-                para.put("formNo",form_no);
-                para.put("paymentDays",payment_days);
+                para.put("form_no",form_no);
+                para.put("payment_days",payment_days);
                 para.put("sareesParcels",sareesParcels);
-                para.put("agent",agent_name);
+                para.put("Agent_name",agent_name);
                 para.put("rate",rate);
-                para.put("party",name_combo2.getSelectedItem().toString());
-                para.put("date",date.getDate());
-                para.put("base",base.getSelectedItem().toString());
-                para.put("totalSarees",totalSarees.getText());
-                para.put("totalParcels",totalParcels.getText());
+                para.put("PartyName",name_combo2.getSelectedItem().toString());
+                para.put("Date",date.getDate());
+                para.put("Quality",base.getSelectedItem().toString());
+                para.put("sarees",totalSarees);
+                para.put("parcels",totalParcels);
                 
                 JasperReport js=JasperCompileManager.compileReport(jd);
                 JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
-                JasperViewer.viewReport(jPrint);
+                JasperViewer.viewReport(jPrint,false);
+                 
       }
       catch(Exception e){
                     System.out.println(e.getMessage());     

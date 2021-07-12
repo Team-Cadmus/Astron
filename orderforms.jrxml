@@ -2,10 +2,20 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3934543-895d-4be0-8a3b-3feb16390deb">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="465"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
+		<![CDATA[]]>
 	</queryString>
-	<field name="field1" class="java.lang.String"/>
+	<field name="Date" class="java.lang.String"/>
+	<field name="form_no" class="java.lang.String"/>
+	<field name="Agent_name" class="java.lang.String"/>
+	<field name="rate" class="java.lang.String"/>
+	<field name="sareesParcels" class="java.lang.String"/>
+	<field name="payment_days" class="java.lang.String"/>
+	<field name="PartyName" class="java.lang.String"/>
+	<field name="Quality" class="java.lang.String"/>
+	<field name="sarees" class="java.lang.String"/>
+	<field name="parcels" class="java.lang.String"/>
 	<variable name="formNo" class="java.lang.String"/>
 	<variable name="date" class="java.lang.String"/>
 	<variable name="sareesParcels" class="java.lang.String"/>
@@ -88,7 +98,7 @@
 				<text><![CDATA[ MOBILE NO.:     98251 12259]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5bae9bc1-cd19-4bbd-af27-1c1108ce9814" x="0" y="20" width="153" height="20"/>
+				<reportElement uuid="5bae9bc1-cd19-4bbd-af27-1c1108ce9814" x="0" y="20" width="176" height="20"/>
 				<textElement/>
 				<text><![CDATA[LANDLINE NO.:+91261 - 263007]]></text>
 			</staticText>
@@ -108,12 +118,12 @@
 				<text><![CDATA[PARTY: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="124038bd-f616-4163-bba0-dfdbd437721c" x="352" y="0" width="180" height="20"/>
+				<reportElement uuid="124038bd-f616-4163-bba0-dfdbd437721c" x="324" y="0" width="208" height="20"/>
 				<textElement/>
 				<text><![CDATA[   EMAIL:     jariwalahemal@yahhoo.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="bf34a657-10a1-4250-8481-c26e32d69add" x="404" y="20" width="151" height="20"/>
+				<reportElement uuid="bf34a657-10a1-4250-8481-c26e32d69add" x="381" y="20" width="151" height="20"/>
 				<textElement/>
 				<text><![CDATA[hemaljari100@gmail.com]]></text>
 			</staticText>
@@ -143,7 +153,7 @@
 				<text><![CDATA[TOTAL SAREES:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e97566ca-0b7b-46b2-b7a0-b2df8c1c0aec" x="404" y="375" width="100" height="20"/>
+				<reportElement uuid="e97566ca-0b7b-46b2-b7a0-b2df8c1c0aec" x="405" y="375" width="16" height="20"/>
 				<textElement/>
 				<text><![CDATA[@]]></text>
 			</staticText>
@@ -167,56 +177,6 @@
 				<textElement/>
 				<text><![CDATA[MR. HEMAL JARIWALA]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="8d267fb7-55cf-4cf6-8bdc-175a4c63b8f3" x="442" y="80" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{formNo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="b3b1491e-560f-4ae4-843b-15a7451f5a22" x="40" y="80" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{date}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="b595fb0f-c5f0-4821-a847-e64e62679c9d" x="432" y="375" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{sareesParcels}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="78587f27-b3e2-4884-8f97-da5cc298bed6" x="53" y="415" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{paymentDays}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="bd87481c-52b0-499e-900a-7dc010bf7a8e" x="53" y="131" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{base}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="11983872-2cbf-416a-b766-334bb0f5fe3e" x="40" y="100" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{party}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="7e035b2d-f0d8-41a5-afe9-5c13085dece4" x="242" y="395" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{rate}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="b895f80f-dbc5-449a-866a-5c6c9b0fae09" x="242" y="375" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{totalSarees}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="734e483e-23c4-435a-9264-ae6907e4db21" x="242" y="355" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{totalParcels}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="56cfd6da-c0f4-4a27-b3b1-4636ace888d9" x="381" y="100" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{agent}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement uuid="355da8db-301b-4059-b5be-cad2641144dc" x="18" y="164" width="64" height="20"/>
 				<textElement/>
@@ -238,24 +198,64 @@
 				<text><![CDATA[PARCELS]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="e54d04be-9ac3-48c7-a77f-e915c41a5b55" x="18" y="184" width="76" height="20"/>
+				<reportElement uuid="1a7793ca-cf3c-412d-a746-f564aa996661" x="242" y="395" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$V{SrNumber}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="95920415-83a8-463f-a5d2-471e4e9a84c6" x="124" y="184" width="100" height="20"/>
+				<reportElement uuid="8e180c15-801a-4604-a3d8-76a9450a8a59" x="421" y="375" width="44" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$V{design}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sareesParcels}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ac852002-d39d-4e88-ba00-efc3d5c3e2c3" x="270" y="184" width="89" height="20"/>
+				<reportElement uuid="816536d1-7354-4160-847b-cf3a6a6c7175" x="30" y="80" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$V{sarees}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="22d8be0f-66e6-47c0-a437-86af5aabb3b3" x="397" y="184" width="100" height="20"/>
+				<reportElement uuid="2d87cb5f-c133-4460-99d5-105fadd3181a" x="40" y="100" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$V{parcels}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{PartyName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ddaf0dbf-3c13-43d5-b9d0-2405dc4dde54" x="52" y="131" width="218" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Quality}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8364e9a1-1dc6-4743-81f3-c04a7a542189" x="442" y="80" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{form_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a88a6170-2f10-44ed-8175-56e3707f88d2" x="381" y="100" width="161" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Agent_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3ddc3991-4742-4d19-a3f1-c7d4c8a8dd95" x="52" y="415" width="48" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{payment_days}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c15d870d-661f-4ceb-a0b3-43a425978d21" x="465" y="375" width="77" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sarees/Parcels]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c8bdbd04-c6ba-405a-885c-e3d61a68ca28" x="100" y="415" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Days]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fcac3c29-e702-4abc-82df-0e5b6a2b9bba" x="242" y="355" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{parcels}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6526dd4e-be0f-4b22-b1b8-81a76f54425d" x="242" y="375" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sarees}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
