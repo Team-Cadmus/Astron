@@ -1,0 +1,77 @@
+ try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+     Connection con;
+    con = DriverManager.getConnection(
+            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+          java.util.Date d3=date.getDate();
+          String SelectedBase=name_combo2.getSelectedItem().toString();
+    String quality=base.getSelectedItem().toString();
+          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    String newDate3=formatter.format(d3);
+        JasperDesign jd=JRXmlLoader.load("E:\\Naman\\Project\\Saree Application Gui\\src\\saree\\application\\gui\\report2.jrxml");  
+        String query="select * from order_form where Date='"+newDate3+"' and PartyName='"+name_combo2.getSelectedItem().toString()+"'"
+                + " and Quality='"+base.getSelectedItem().toString()+"'";
+        String query2="select SrNumber,Design,sarees,parcels from order_details od NATURAL JOIN order_form ofrm WHERE (ofrm.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (ofrm.Date='"+newDate3+"') and "
+                + "(ofrm.Quality='"+base.getSelectedItem().toString()+"')";
+ String query3="select SUM(sarees),SUM(parcels) from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";       
+       
+       //pst2.executeQuery();
+JRDesignQuery newQuery=new JRDesignQuery();
+        newQuery.setText(query2);
+        jd.setQuery(newQuery);
+        
+        HashMap<String,Object> para = new HashMap<>();
+        PreparedStatement pst=con.prepareStatement(query);
+        PreparedStatement pst2=con.prepareStatement(query2);
+        PreparedStatement pst3=con.prepareStatement(query3);
+                ResultSet rs=pst.executeQuery();
+                ResultSet rs2=pst2.executeQuery();
+                ResultSet rs3=pst3.executeQuery();
+                int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0;
+                String agent_name="",rate="";
+                while(rs3.next()){
+                    totalSarees=rs3.getInt(1);
+                    totalParcels=rs3.getInt(2);
+                }
+                System.out.println(totalSarees);
+                System.out.println(totalParcels);
+                while(rs.next()){
+                    form_no=rs.getInt("form_no");
+                    payment_days=rs.getInt("payment_days");
+                    sareesParcels=rs.getInt("sareesParcels");
+                    agent_name=rs.getString("Agent_name");
+                    rate=rs.getString("rate");
+                }
+                 int sarees=0,parcels=0,SrNumber=0;
+                 String Design="";
+                while(rs2.next()){
+                    SrNumber=rs2.getInt("SrNumber");
+                    //System.out.println(SrNumber);
+                    Design=rs2.getString("Design");
+                    //System.out.println(Design);
+                    sarees=rs2.getInt("sarees");
+                    //System.out.println(sarees);
+                    parcels=rs2.getInt("parcels");
+                    //System.out.println(parcels);
+                }
+                
+                System.out.print(form_no);
+                para.put("form_no",form_no);
+                para.put("payment_days",payment_days);
+                para.put("sareesParcels",sareesParcels);
+                para.put("Agent_name",agent_name);
+                para.put("rate",rate);
+                para.put("PartyName",name_combo2.getSelectedItem().toString());
+                //para.put("Date",date.getDate());
+                para.put("Quality",base.getSelectedItem().toString());
+                para.put("sarees",totalSarees);
+                para.put("parcels",totalParcels);
+                
+                JasperReport js=JasperCompileManager.compileReport(jd);
+                JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
+                JasperViewer.viewReport(jPrint,false);
+                 
+      }
+      catch(Exception e){
+                    System.out.println(e.getMessage());     
+         }    
