@@ -402,6 +402,7 @@ try{
     }
     else if(i_want_to.getSelectedIndex()==0){
     int rows=displayTable.getRowCount();
+    int totalSarees=0,totalParcels=0;
     //System.out.println(rows);
     for(int row=0;row<rows;row++){
        
@@ -411,10 +412,16 @@ try{
         String design=(String)displayTable.getValueAt(row,3);
         String sarees=(String)displayTable.getValueAt(row,4);
         String parcels=(String)displayTable.getValueAt(row,5);
+        totalSarees=Integer.parseInt(sarees)+totalSarees;
+        totalParcels=Integer.parseInt(parcels)+totalParcels;
+        //System.out.println(totalSarees);
+        //System.out.println(totalParcels);
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
     String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
+    String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
+    PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
     pst2.setString(2,newDate3);
     pst2.setString(3,srno);
@@ -424,6 +431,14 @@ try{
        pst2.setString(7, parcels);
        
        pst2.executeUpdate();
+       pst3.setInt(1,totalParcels);
+       pst3.setInt(2,totalSarees);
+       pst3.setString(3,newDate3);
+       pst3.setString(4,party);
+       pst3.setString(5,SelectedBase);
+       pst3.executeUpdate();
+       
+       
     }
     
     }
@@ -441,6 +456,7 @@ try{
     pst1.setString(8,SelectedBase);
     pst1.executeUpdate();
     int rows=displayTable.getRowCount();
+    int totalSarees=0,totalParcels=0;
     //System.out.println(rows);
     for(int row=0;row<rows;row++){
        
@@ -450,10 +466,14 @@ try{
         String design=(String)displayTable.getValueAt(row,3);
         String sarees=(String)displayTable.getValueAt(row,4);
         String parcels=(String)displayTable.getValueAt(row,5);
+        totalSarees=Integer.parseInt(sarees)+totalSarees;
+        totalParcels=Integer.parseInt(parcels)+totalParcels;
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
     String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
+    String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
+    PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
     pst2.setString(2,newDate3);
     pst2.setString(3,srno);
@@ -463,6 +483,14 @@ try{
        pst2.setString(7, parcels);
        
        pst2.executeUpdate();
+       
+        pst3.setInt(1,totalParcels);
+       pst3.setInt(2,totalSarees);
+       pst3.setString(3,newDate3);
+       pst3.setString(4,party);
+       pst3.setString(5,SelectedBase);
+       pst3.executeUpdate();
+       
     }
     
     }
@@ -589,7 +617,6 @@ new Update_record().setVisible(true);
         JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");  
         String query="select * from order_form where Date='"+newDate3+"' and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
         String query2="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
- String query3="select SUM(sarees),SUM(parcels) from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";       
        
        //pst2.executeQuery();
 JRDesignQuery newQuery=new JRDesignQuery();
@@ -598,15 +625,12 @@ JRDesignQuery newQuery=new JRDesignQuery();
         
         HashMap<String,Object> para = new HashMap<>();
         PreparedStatement pst=con.prepareStatement(query);
-        PreparedStatement pst3=con.prepareStatement(query3);
+        
                 ResultSet rs=pst.executeQuery();
-                ResultSet rs3=pst3.executeQuery();
+                
                 int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0;
                 String agent_name="",rate="";
-                while(rs3.next()){
-                    totalSarees=rs3.getInt(1);
-                    totalParcels=rs3.getInt(2);
-                }
+               
                 System.out.println(totalSarees);
                 System.out.println(totalParcels);
                 while(rs.next()){
@@ -625,8 +649,8 @@ JRDesignQuery newQuery=new JRDesignQuery();
                 para.put("PartyName",name_combo2.getSelectedItem().toString());
                 para.put("Date",date.getDate());
                 para.put("Quality",base.getSelectedItem().toString());
-                para.put("sarees",totalSarees);
-                para.put("parcels",totalParcels);
+                para.put("totalSarees",totalSarees);
+                para.put("totalParcels",totalParcels);
                 
                 JasperReport js=JasperCompileManager.compileReport(jd);
                 JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
