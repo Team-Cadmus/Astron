@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3934543-895d-4be0-8a3b-3feb16390deb">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="931"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
@@ -14,8 +14,8 @@
 	<field name="payment_days" class="java.lang.String"/>
 	<field name="PartyName" class="java.lang.String"/>
 	<field name="Quality" class="java.lang.String"/>
-	<field name="sarees" class="java.lang.String"/>
-	<field name="parcels" class="java.lang.String"/>
+	<field name="totalSarees" class="java.lang.String"/>
+	<field name="totalParcels" class="java.lang.String"/>
 	<variable name="formNo" class="java.lang.String"/>
 	<variable name="date" class="java.lang.String"/>
 	<variable name="sareesParcels" class="java.lang.String"/>
@@ -213,7 +213,7 @@
 				<textFieldExpression><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="2d87cb5f-c133-4460-99d5-105fadd3181a" x="40" y="100" width="100" height="20"/>
+				<reportElement uuid="2d87cb5f-c133-4460-99d5-105fadd3181a" x="40" y="100" width="202" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{PartyName}]]></textFieldExpression>
 			</textField>
@@ -248,14 +248,14 @@
 				<text><![CDATA[Days]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="fcac3c29-e702-4abc-82df-0e5b6a2b9bba" x="242" y="355" width="100" height="20"/>
+				<reportElement uuid="540d0c5f-71ad-480b-bf29-41c9098e9655" x="242" y="355" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{parcels}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{totalParcels}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="6526dd4e-be0f-4b22-b1b8-81a76f54425d" x="242" y="375" width="100" height="20"/>
+				<reportElement uuid="128e9b2b-4f30-4bb8-963b-c5da424fd0da" x="242" y="375" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{sarees}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{totalSarees}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
