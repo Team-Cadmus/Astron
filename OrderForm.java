@@ -189,7 +189,7 @@ public class OrderForm extends javax.swing.JFrame {
 
         jLabel11.setText("I want to:");
 
-        i_want_to.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insert table data", "Insert form data", "Insert all data together", "Search by Date", "Search by Quality and Date", "Delete order data", "Update order data", " " }));
+        i_want_to.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insert table data", "Insert form data", "Insert all data together", "Search by Date", "Search by Quality and Date", "Delete table data", "Delete order data" }));
 
         search.setText("Search");
         search.addActionListener(new java.awt.event.ActionListener() {
@@ -539,20 +539,65 @@ show_user();        // TODO add your handling code here:
     }
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
 try{
+      if(i_want_to.getSelectedIndex()==5){  
             Class.forName("com.mysql.cj.jdbc.Driver");
+        
      Connection con;
     con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
     DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
             int row = displayTable.getSelectedRow();
             String date=(String)displayTable.getValueAt(row,0);
             String srno=(String)displayTable.getValueAt(row,2);
-            String query="delete from order_details where SrNumber=? and Date=?";
+            String quality=(String)displayTable.getValueAt(row,1);
+            String party=name_combo2.getSelectedItem().toString();
+            String sarees=(String)displayTable.getValueAt(row,4);
+            String parcels=(String)displayTable.getValueAt(row,5);
+            int newParcels=Integer.parseInt(totalParcels.getText())-Integer.parseInt(parcels);
+            int newSarees=Integer.parseInt(totalSarees.getText())-Integer.parseInt(sarees);
+            String query="delete from order_details where SrNumber=? and Date=? and quality=? and PartyName=?";
+            String query2="update order_form set totalSarees=?,totalParcels=? where Date=? and quality=? and PartyName=?";
             PreparedStatement pst=con.prepareStatement(query);
+            PreparedStatement pst2=con.prepareStatement(query2);
             pst.setString(1,srno);
             pst.setString(2,date);
+            pst.setString(3, quality);
+            pst.setString(4, party);
             pst.executeUpdate();
+            
+            pst2.setInt(1,newSarees);
+            pst2.setInt(2,newParcels);
+            pst2.setString(3,date);
+            pst2.setString(4,quality);
+            pst2.setString(5,party);
+            pst2.executeUpdate();
+            
             new Deleted_record().setVisible(true);
             model.removeRow(row);
+      }
+      else if(i_want_to.getSelectedIndex()==6){
+     Class.forName("com.mysql.cj.jdbc.Driver");
+        
+     Connection con;
+    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    java.util.Date d3=date.getDate();
+    String newDate3=formatter.format(d3);
+    String query1="delete from order_form where form_no=? and PartyName=? and Date=?";
+    PreparedStatement pst1=con.prepareStatement(query1);
+    pst1.setString(1, formNo.getText());
+    pst1.setString(2, name_combo2.getSelectedItem().toString());
+    pst1.setString(3, newDate3);
+        
+    String query2="delete from order_details where PartyName=? and Date=? and Quality=?";
+    PreparedStatement pst2=con.prepareStatement(query2);
+    
+    pst2.setString(1, name_combo2.getSelectedItem().toString());
+    pst2.setString(2, newDate3);
+    pst2.setString(3,base.getSelectedItem().toString());
+    pst1.executeUpdate();
+    pst2.executeUpdate();
+      }
+        
 }
 catch(Exception e){
             System.out.println(e.getMessage());
@@ -574,30 +619,56 @@ else if(i_want_to.getSelectedIndex()==4){
     }//GEN-LAST:event_searchActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-try{  
-       Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
+String quality=base.getSelectedItem().toString();
+String party=name_combo2.getSelectedItem().toString();
+SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    java.util.Date d3=date.getDate();
+    String newDate3=formatter.format(d3);
+
+        try{  
+    
+         Connection con;
     con = DriverManager.getConnection(
             "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-           TableModel model=displayTable.getModel();
-             String query="Update order_details SET Design=?,sarees=?,parcels=? where PartyName=? and Date=? and SrNumber=? and Quality=?";
-             PreparedStatement pst=con.prepareStatement(query);
-             /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-            java.util.Date d3=date.getDate();
-            String newDate3=formatter.format(d3);*/
-            
+    int rows=displayTable.getRowCount();
+    int totalSarees=0,totalParcels=0;
+for(int row=0;row<rows;row++){
+     String sarees=(String)displayTable.getValueAt(row,4);
+        String parcels=(String)displayTable.getValueAt(row,5);
+        totalSarees=Integer.parseInt(sarees)+totalSarees;
+        totalParcels=Integer.parseInt(parcels)+totalParcels;
+}
+    String query1="update order_form set Agent_name=?,form_no=?,rate=?,sareesParcels=?,totalSarees=?,totalParcels=? where Date=? and PartyName=? and Quality=?";
+    TableModel model=displayTable.getModel();
+   String query2="Update order_details SET Design=?,sarees=?,parcels=? where PartyName=? and Date=? and SrNumber=? and Quality=?";
+PreparedStatement pst1=con.prepareStatement(query1);
+PreparedStatement pst2=con.prepareStatement(query2);
+             
              int row=displayTable.getSelectedRow();
-             System.out.print(row);
+       pst1.setString(1,agent_dropbox.getSelectedItem().toString());
+       pst1.setString(2,formNo.getText());
+       pst1.setString(3,rate.getText());
+       pst1.setString(4,sareesParcels.getText());
+       pst1.setInt(5,totalSarees);
+       pst1.setInt(6,totalParcels);
+       pst1.setString(7,newDate3);
+       pst1.setString(8,party);
+       pst1.setString(9,quality);
+       pst1.executeUpdate();
            
-            pst.setString(1,model.getValueAt(row,3).toString().trim());
-            pst.setString(2,model.getValueAt(row,4).toString().trim());
-            pst.setString(3,model.getValueAt(row,5).toString().trim());
-            pst.setString(4,name_combo2.getSelectedItem().toString());
-            pst.setString(5,model.getValueAt(row,0).toString());
-            pst.setString(6,model.getValueAt(row,2).toString().trim());
-            pst.setString(7,model.getValueAt(row,1).toString().trim());
-            pst.executeUpdate();
+            pst2.setString(1,model.getValueAt(row,3).toString().trim());
+            pst2.setString(2,model.getValueAt(row,4).toString().trim());
+            pst2.setString(3,model.getValueAt(row,5).toString().trim());
+            pst2.setString(4,name_combo2.getSelectedItem().toString());
+            pst2.setString(5,model.getValueAt(row,0).toString());
+            pst2.setString(6,model.getValueAt(row,2).toString().trim());
+            pst2.setString(7,model.getValueAt(row,1).toString().trim());
+            pst2.executeUpdate();
+    
+    
+    
 new Update_record().setVisible(true);
+    
     }        catch(Exception e){
                     System.out.println(e.getMessage());     
          }           // TODO add your handling code here:
