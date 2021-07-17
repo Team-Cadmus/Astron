@@ -23,14 +23,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Stack;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -509,13 +507,13 @@ public class OrderForm extends javax.swing.JFrame {
      para.put("totalParcels",totalParcels);
      
      List<PdfListTable> pdfTableList = new ArrayList<PdfListTable>();
-     PreparedStatement pst2=con.prepareStatement(query2);
+     PreparedStatement pst2=con.prepareStatement(query);
      ResultSet rs2=pst2.executeQuery();
      while(rs2.next()){
           pdfTableList.add(new PdfListTable(rs2.getInt("SrNumber"),rs2.getString("Design"),rs2.getInt("sarees"),rs2.getInt("parcels")));
      }
 
-     JRDataSource listToData=new JRBeanCollectionDataSource(pdfTableList,false);
+     JRBeanCollectionDataSource listToData=new JRBeanCollectionDataSource(pdfTableList);
     para.put("ListToTablePdf",listToData);
     
      JasperReport js=JasperCompileManager.compileReport(jd);

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3934543-895d-4be0-8a3b-3feb16390deb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="167"/>
+	<property name="ireport.y" value="59"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -23,12 +23,12 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Table Dataset 1" uuid="84401722-8ca3-47a8-84e6-d710d5879a9a">
+	<subDataset name="PdfListTable" uuid="84401722-8ca3-47a8-84e6-d710d5879a9a">
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="SrNumber" class="java.lang.Integer"/>
-		<field name="Design" class="java.lang.String"/>
+		<field name="srNumber" class="java.lang.Integer"/>
+		<field name="design" class="java.lang.String"/>
 		<field name="sarees" class="java.lang.Integer"/>
 		<field name="parcels" class="java.lang.Integer"/>
 	</subDataset>
@@ -266,7 +266,7 @@
 			<componentElement>
 				<reportElement uuid="821c7c87-97f7-49cd-9216-5861144ef8ee" key="table" style="table" x="15" y="180" width="527" height="140"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 1" uuid="50bc8087-9e92-499e-8b78-ddf4c49ed0ea">
+					<datasetRun subDataset="PdfListTable" uuid="50bc8087-9e92-499e-8b78-ddf4c49ed0ea">
 						<dataSourceExpression><![CDATA[$P{ListToTablePdf}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column uuid="9f05d793-f468-4fd3-b122-870cf405bf91" width="144">
@@ -282,9 +282,9 @@
 						<jr:columnFooter style="table_TD" height="30" rowSpan="1"/>
 						<jr:detailCell style="table_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement uuid="30c7e2b8-6437-4cb4-acb1-2c542e97ab09" x="0" y="0" width="144" height="30"/>
+								<reportElement uuid="db54a801-f8e9-4303-86d6-40201b4d910b" x="0" y="0" width="144" height="30"/>
 								<textElement/>
-								<textFieldExpression><![CDATA[$F{SrNumber}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{srNumber}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -301,9 +301,9 @@
 						<jr:columnFooter style="table_TD" height="30" rowSpan="1"/>
 						<jr:detailCell style="table_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement uuid="79025664-b4dd-4c19-94e1-d86c53948a47" x="0" y="0" width="133" height="30"/>
+								<reportElement uuid="9053a846-cf40-4886-bfda-e7f092730aa2" x="0" y="0" width="133" height="30"/>
 								<textElement/>
-								<textFieldExpression><![CDATA[$F{Design}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{design}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -320,7 +320,7 @@
 						<jr:columnFooter style="table_TD" height="30" rowSpan="1"/>
 						<jr:detailCell style="table_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement uuid="808969c8-9305-4ed5-b217-8f967352c28a" x="0" y="0" width="145" height="30"/>
+								<reportElement uuid="a82c764b-54c9-4bd0-bfac-cf6f8e200dc0" x="0" y="0" width="145" height="30"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{sarees}]]></textFieldExpression>
 							</textField>
@@ -339,7 +339,7 @@
 						<jr:columnFooter style="table_TD" height="30" rowSpan="1"/>
 						<jr:detailCell style="table_TD" height="30" rowSpan="1">
 							<textField>
-								<reportElement uuid="f6df4db8-155f-4b31-86a5-c8909c0b6d86" x="0" y="0" width="158" height="30"/>
+								<reportElement uuid="f8bab6a3-801f-4f83-9dc2-a1360923c69d" x="0" y="0" width="158" height="30"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{parcels}]]></textFieldExpression>
 							</textField>

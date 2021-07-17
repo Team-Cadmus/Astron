@@ -9,13 +9,13 @@ package saree.application.gui;
  *
  * @author Hii
  */
-class PdfListTable {
-     int sarees,parcels,SrNumber;
-     String Design;
+public class PdfListTable {
+     int sarees,parcels,srNumber;
+     String design;
 
-     public PdfListTable( int SrNumber, String Design,int sarees, int parcels) {
-          this.SrNumber = SrNumber;
-          this.Design = Design;
+     public PdfListTable(int SrNumber, String Design,int sarees, int parcels) {
+          this.srNumber = SrNumber;
+          this.design = Design;
           this.sarees = sarees;
           this.parcels = parcels;
      }
@@ -27,9 +27,26 @@ class PdfListTable {
           return parcels;
      }
      public int getSrNumber() {
-          return SrNumber;
+          return srNumber;
      }
      public String getDesign() {
-          return Design;
+          return design;
      }
+
+     public void setSarees(int sarees) {
+          this.sarees = sarees;
+     }
+
+     public void setParcels(int parcels) {
+          this.parcels = parcels;
+     }
+
+     public void setSrNumber(int srNumber) {
+          this.srNumber = srNumber;
+     }
+
+     public void setDesign(String design) {
+          this.design = design;
+     }
+     
 }
