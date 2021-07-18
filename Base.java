@@ -65,6 +65,9 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("Software_logo.jpeg")).getImage());
@@ -128,12 +131,12 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         message_signIn.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jPanel2.add(message_signIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(892, 40, 368, 28));
 
-        jLabel6.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 48)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 36)); // NOI18N
         jLabel6.setText("ASTRON");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 580, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 590, 190, 50));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Astron_logo.jpeg"))); // NOI18N
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 160, 150));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 500, 160, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/updation.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,7 +144,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, 300, 150));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clearence.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,7 +152,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 jLabel2MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 90, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 300, 150));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/display.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,7 +160,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 300, 140));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/collection.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,7 +168,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 290, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 300, 140));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data entry.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,7 +176,31 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 300, 160));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/party_details.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 300, 300, 150));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/outstanding.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 300, 150));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OrderForm.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, -1, 150));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, 0, 1811, 780));
 
@@ -275,6 +302,39 @@ page.setVisible(true);
             lg.setVisible(true);
         }    // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+      if(signIn.getAccessValue()){
+            PartyDisplay obj1=new PartyDisplay();
+           obj1.setVisible(true);
+        }
+        else{
+            LogIn_First lg=new LogIn_First();
+            lg.setVisible(true);
+        }    // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+       if(signIn.getAccessValue()){
+            Outstanding obj1=new Outstanding();
+           obj1.setVisible(true);
+        }
+        else{
+            LogIn_First lg=new LogIn_First();
+            lg.setVisible(true);
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+if(signIn.getAccessValue()){
+            OrderForm obj1=new OrderForm();
+           obj1.setVisible(true);
+        }
+        else{
+            LogIn_First lg=new LogIn_First();
+            lg.setVisible(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseClicked
 public void display_name(){
         if(signIn.getAccessValue()){
                message_signIn.setText("Hello, "+(new LoginPage()).name);
@@ -320,12 +380,15 @@ public void display_name(){
     private javax.swing.JButton btnSignUp;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton log_out;
