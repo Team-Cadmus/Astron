@@ -1,4 +1,8 @@
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,16 +20,27 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.governors.MaxPagesGovernor;
 import net.sf.jasperreports.view.JasperViewer;
 
 /*
@@ -47,8 +62,74 @@ public class OrderForm extends javax.swing.JFrame {
         initComponents();
         FillAgentCombo();
          FillCombo();
+         jScrollPane1.getViewport().setBackground(new Color(116,121,180));
+         name_combo2.setRenderer(new OrderForm.Demo(name_combo2.getRenderer()));
+          agent_dropbox.setRenderer(new OrderForm.Demo(agent_dropbox.getRenderer()));
+          i_want_to.setRenderer(new OrderForm.Demo(i_want_to.getRenderer()));
+          base.setRenderer(new OrderForm.Demo(base.getRenderer()));
+        TableCellRenderer alteredColorRenderer = new AlterColor();
+        displayTable.setDefaultRenderer(Object.class, alteredColorRenderer);
+        headerColorAndWidth();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
          
        
+    }
+    class Demo extends DefaultListCellRenderer
+    {
+    // TODO add your handling code here:
+    private ListCellRenderer defaultRenderer;
+    public Demo(ListCellRenderer defaultRenderer){
+        this.defaultRenderer=defaultRenderer;
+        
+    }
+    public Component getListCellRendererComponent(JList list,Object value,int index,boolean isSelected,boolean cellHasFocus){
+        Component c = defaultRenderer.getListCellRendererComponent(list, value,
+        index, isSelected, cellHasFocus);
+    if (c instanceof JLabel) {
+      if (isSelected) {
+        c.setBackground(new Color(239,40,83));
+      } else {
+        c.setBackground(Color.white);
+      }
+    } else {
+      c.setBackground(Color.black);
+      c = super.getListCellRendererComponent(list, value, index, isSelected,
+          cellHasFocus);
+    }
+        return c;
+    }
+}
+
+    public final void headerColorAndWidth(){
+        DefaultTableCellRenderer headerClr = new DefaultTableCellRenderer();
+        headerClr.setBackground(new Color(255, 138, 115));
+       // headerClr.setForeground(Color.decode("#FCE7FC"));
+       displayTable.setRowHeight(displayTable.getRowHeight()+20);
+               
+
+        displayTable.getTableHeader().getColumnModel().getColumn(0).setHeaderRenderer(headerClr);
+        displayTable.getTableHeader().getColumnModel().getColumn(1).setHeaderRenderer(headerClr);
+        displayTable.getTableHeader().getColumnModel().getColumn(2).setHeaderRenderer(headerClr);
+        displayTable.getTableHeader().getColumnModel().getColumn(3).setHeaderRenderer(headerClr);
+        displayTable.getTableHeader().getColumnModel().getColumn(4).setHeaderRenderer(headerClr);
+        displayTable.getTableHeader().getColumnModel().getColumn(5).setHeaderRenderer(headerClr);
+        JTableHeader tableHeader = displayTable.getTableHeader();
+        tableHeader.setVisible(true);
+        tableHeader.setFont(new Font("Copperplate Gothic Bold",1, 24));
+        tableHeader.setOpaque(false); 
+        tableHeader.setForeground(new Color(255,255,255));
+        TableColumn tc1=displayTable.getColumnModel().getColumn(0);
+        tc1.setPreferredWidth(30);
+        TableColumn tc2=displayTable.getColumnModel().getColumn(1);
+        tc2.setPreferredWidth(100);
+        TableColumn tc3=displayTable.getColumnModel().getColumn(2);
+        tc3.setPreferredWidth(3);
+        TableColumn tc4=displayTable.getColumnModel().getColumn(3);
+        tc4.setPreferredWidth(50);
+        TableColumn tc5=displayTable.getColumnModel().getColumn(4);
+        tc5.setPreferredWidth(20);
+        TableColumn tc6=displayTable.getColumnModel().getColumn(5);
+        tc6.setPreferredWidth(20);
     }
 
     /**
@@ -92,13 +173,25 @@ public class OrderForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         i_want_to = new javax.swing.JComboBox<>();
         search = new javax.swing.JButton();
+        city = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("Software_logo.jpeg")).getImage());
+        setPreferredSize(new java.awt.Dimension(1299, 760));
 
+        jPanel1.setBackground(new java.awt.Color(31, 35, 71));
+
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Date:");
 
+        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Party:");
 
+        name_combo2.setBackground(new java.awt.Color(249, 173, 129));
+        name_combo2.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         name_combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---select party---" }));
         name_combo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,18 +199,30 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Order Form No.");
 
+        formNo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         formNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 formNoActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Agent:");
 
+        agent_dropbox.setBackground(new java.awt.Color(249, 173, 129));
+        agent_dropbox.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Quality:");
 
+        base.setBackground(new java.awt.Color(249, 173, 129));
+        base.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         base.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Balatan Butta Rich Pallu", "Balatan Butta Chit Pallu", "Raw Slub Butta Rich Pallu", "Raw Slub Butta Chit Pallu", "Balatan Embose Chit Pallu", "Raw Slub all Over Butta" }));
         base.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +230,7 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        displayTable.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         displayTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -135,16 +241,43 @@ public class OrderForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(displayTable);
 
+        jLabel6.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Sarees/Parcels:");
 
+        sareesParcels.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Payment Days:");
 
+        paymentDays.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Total sarees:");
 
+        totalSarees.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        totalSarees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalSareesActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Total Parcels:");
 
+        totalParcels.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Rate:");
 
+        rate.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+
+        insert.setBackground(new java.awt.Color(255, 138, 115));
+        insert.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         insert.setText("Insert");
         insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +285,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        update.setBackground(new java.awt.Color(255, 138, 115));
+        update.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         update.setText("Update");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +294,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        delete.setBackground(new java.awt.Color(255, 138, 115));
+        delete.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         delete.setText("Delete");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +303,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        reset.setBackground(new java.awt.Color(255, 138, 115));
+        reset.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         reset.setText("Reset");
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +312,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        pdf.setBackground(new java.awt.Color(255, 138, 115));
+        pdf.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         pdf.setText("Create PDF ");
         pdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +321,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        insertRow.setBackground(new java.awt.Color(255, 138, 115));
+        insertRow.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         insertRow.setText("Insert Row");
         insertRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,10 +330,16 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("I want to:");
 
+        i_want_to.setBackground(new java.awt.Color(249, 173, 129));
+        i_want_to.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         i_want_to.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insert table data", "Insert form data", "Insert all data together", "Search by Date", "Search by Quality and Date", "Delete table data", "Delete order data" }));
 
+        search.setBackground(new java.awt.Color(255, 138, 115));
+        search.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         search.setText("Search");
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,165 +347,175 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
+        city.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("City:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addComponent(jLabel11)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(64, 64, 64))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)))))
-                .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(base, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(165, 165, 165)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paymentDays, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(987, 987, 987)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(insertRow)
+                            .addComponent(insert, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1055, 1055, 1055)
+                        .addComponent(pdf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(insertRow)
-                                .addGap(41, 41, 41)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(insert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(41, 41, 41)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                    .addComponent(reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(pdf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(145, 145, 145))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel11)
+                                        .addGap(14, 14, 14)
+                                        .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(54, 54, 54)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(300, 300, 300))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel12)
+                                                            .addComponent(jLabel1))
+                                                        .addGap(99, 99, 99)
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(city)
+                                                            .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel2)
+                                                        .addGap(90, 90, 90)
+                                                        .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(81, 81, 81)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel4)
+                                                    .addComponent(jLabel5))
+                                                .addGap(17, 17, 17)))))
+                                .addGap(3, 3, 3)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(totalSarees, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(totalParcels, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(base, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(103, 103, 103)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 959, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(paymentDays, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalParcels, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(totalSarees, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(996, 996, 996)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(base, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)
-                        .addComponent(paymentDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(totalSarees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel9))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(totalParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel11)
+                            .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(paymentDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(base, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalSarees, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(insert)
-                                    .addComponent(update))
+                                    .addComponent(jLabel9)
+                                    .addComponent(totalParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabel10)))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(insert)
+                            .addComponent(update))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(delete)
+                            .addComponent(reset))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(delete)
-                                    .addComponent(reset))
+                                .addComponent(insertRow))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(insertRow)
-                                    .addComponent(search)))
-                            .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pdf)
-                        .addGap(179, 179, 179))))
+                                .addComponent(search)))
+                        .addGap(18, 18, 18)
+                        .addComponent(pdf))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(59, 59, 59))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -364,13 +523,15 @@ public class OrderForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1062, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 117, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleName("Order form");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -388,16 +549,17 @@ try{
     String party=name_combo2.getSelectedItem().toString();
     String agent=agent_dropbox.getSelectedItem().toString();
     if(i_want_to.getSelectedIndex()==1){
-    String query1="insert into order_form(Date,PartyName,Agent_name,form_no,payment_days,rate,sareesParcels,Quality) values (?,?,?,?,?,?,?,?)";
+    String query1="insert into order_form(Date,PartyName,city,Agent_name,form_no,payment_days,rate,sareesParcels,Quality) values (?,?,?,?,?,?,?,?,?)";
     PreparedStatement pst1=con.prepareStatement(query1);
     pst1.setString(1,newDate3);
     pst1.setString(2,party);
-    pst1.setString(3,agent);
-    pst1.setString(4,formNo.getText());
-    pst1.setString(5,paymentDays.getText());
-    pst1.setString(6,rate.getText());
-    pst1.setString(7,sareesParcels.getText());
-    pst1.setString(8,SelectedBase);
+    pst1.setString(3,city.getText());
+    pst1.setString(4,agent);
+    pst1.setString(5,formNo.getText());
+    pst1.setString(6,paymentDays.getText());
+    pst1.setString(7,rate.getText());
+    pst1.setString(8,sareesParcels.getText());
+    pst1.setString(9,SelectedBase);
     pst1.executeUpdate();
     }
     else if(i_want_to.getSelectedIndex()==0){
@@ -418,17 +580,18 @@ try{
         //System.out.println(totalParcels);
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
-    String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
+    String query2="insert into order_details(PartyName,city,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
     String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
     PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
-    pst2.setString(2,newDate3);
-    pst2.setString(3,srno);
-     pst2.setString(4,design);
-      pst2.setString(5,SelectedBase);
-       pst2.setString(6,sarees);
-       pst2.setString(7, parcels);
+     pst2.setString(2,city.getText());
+    pst2.setString(3,newDate3);
+    pst2.setString(4,srno);
+     pst2.setString(5,design);
+      pst2.setString(6,SelectedBase);
+       pst2.setString(7,sarees);
+       pst2.setString(8, parcels);
        
        pst2.executeUpdate();
        pst3.setInt(1,totalParcels);
@@ -444,16 +607,17 @@ try{
     }
     }
     else if(i_want_to.getSelectedIndex()==2){
-        String query1="insert into order_form(Date,PartyName,Agent_name,form_no,payment_days,rate,sareesParcels,Quality) values (?,?,?,?,?,?,?,?)";
+        String query1="insert into order_form(Date,PartyName,city,Agent_name,form_no,payment_days,rate,sareesParcels,Quality) values (?,?,?,?,?,?,?,?,?)";
     PreparedStatement pst1=con.prepareStatement(query1);
     pst1.setString(1,newDate3);
     pst1.setString(2,party);
-    pst1.setString(3,agent);
-    pst1.setString(4,formNo.getText());
-    pst1.setString(5,paymentDays.getText());
-    pst1.setString(6,rate.getText());
-    pst1.setString(7,sareesParcels.getText());
-    pst1.setString(8,SelectedBase);
+    pst1.setString(3,city.getText());
+    pst1.setString(4,agent);
+    pst1.setString(5,formNo.getText());
+    pst1.setString(6,paymentDays.getText());
+    pst1.setString(7,rate.getText());
+    pst1.setString(8,sareesParcels.getText());
+    pst1.setString(9,SelectedBase);
     pst1.executeUpdate();
     int rows=displayTable.getRowCount();
     int totalSarees=0,totalParcels=0;
@@ -470,17 +634,18 @@ try{
         totalParcels=Integer.parseInt(parcels)+totalParcels;
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
-    String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
+    String query2="insert into order_details(PartyName,city,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
     String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
     PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
-    pst2.setString(2,newDate3);
-    pst2.setString(3,srno);
-     pst2.setString(4,design);
-      pst2.setString(5,SelectedBase);
-       pst2.setString(6,sarees);
-       pst2.setString(7, parcels);
+    pst2.setString(2,city.getText());
+    pst2.setString(3,newDate3);
+    pst2.setString(4,srno);
+     pst2.setString(5,design);
+      pst2.setString(6,SelectedBase);
+       pst2.setString(7,sarees);
+       pst2.setString(8, parcels);
        
        pst2.executeUpdate();
        
@@ -532,6 +697,7 @@ show_user();        // TODO add your handling code here:
         name_combo2.setSelectedIndex(0);
         agent_dropbox.setSelectedIndex(0);
         sareesParcels.setText("");
+        city.setText("");
         formNo.setText("");
         base.setSelectedIndex(0);
         paymentDays.setText("");
@@ -638,36 +804,61 @@ for(int row=0;row<rows;row++){
         totalSarees=Integer.parseInt(sarees)+totalSarees;
         totalParcels=Integer.parseInt(parcels)+totalParcels;
 }
-    String query1="update order_form set Agent_name=?,form_no=?,rate=?,sareesParcels=?,totalSarees=?,totalParcels=? where Date=? and PartyName=? and Quality=?";
+    String query1="update order_form set Agent_name=?,city=?,form_no=?,rate=?,sareesParcels=?,totalSarees=?,totalParcels=?,payment_days=? where Date=? and PartyName=? and Quality=?";
     TableModel model=displayTable.getModel();
    String query2="Update order_details SET Design=?,sarees=?,parcels=? where PartyName=? and Date=? and SrNumber=? and Quality=?";
 PreparedStatement pst1=con.prepareStatement(query1);
 PreparedStatement pst2=con.prepareStatement(query2);
              
              int row=displayTable.getSelectedRow();
+             if(row==-1){
        pst1.setString(1,agent_dropbox.getSelectedItem().toString());
-       pst1.setString(2,formNo.getText());
-       pst1.setString(3,rate.getText());
-       pst1.setString(4,sareesParcels.getText());
-       pst1.setInt(5,totalSarees);
-       pst1.setInt(6,totalParcels);
-       pst1.setString(7,newDate3);
-       pst1.setString(8,party);
-       pst1.setString(9,quality);
+       pst1.setString(2,city.getText());
+       pst1.setString(3,formNo.getText());
+       pst1.setString(4,rate.getText());
+       pst1.setString(5,sareesParcels.getText());
+       pst1.setInt(6,totalSarees);
+       pst1.setInt(7,totalParcels);
+        pst1.setString(8,paymentDays.getText());
+       
+       pst1.setString(9,newDate3);
+       pst1.setString(10,party);
+       pst1.setString(11,quality);
        pst1.executeUpdate();
-           
-            pst2.setString(1,model.getValueAt(row,3).toString().trim());
+       //System.out.print("update 1");
+         new Update_record().setVisible(true);  
+             }
+             else{
+                 pst1.setString(1,agent_dropbox.getSelectedItem().toString());
+       pst1.setString(2,city.getText());
+       pst1.setString(3,formNo.getText());
+       pst1.setString(4,rate.getText());
+       pst1.setString(5,sareesParcels.getText());
+       pst1.setInt(6,totalSarees);
+       pst1.setInt(7,totalParcels);
+        pst1.setString(8,paymentDays.getText());
+       pst1.setString(9,newDate3);
+       pst1.setString(10,party);
+       pst1.setString(11,quality);
+       pst1.executeUpdate();
+       //System.out.print("update 1");
+        
+       pst2.setString(1,model.getValueAt(row,3).toString().trim());
             pst2.setString(2,model.getValueAt(row,4).toString().trim());
             pst2.setString(3,model.getValueAt(row,5).toString().trim());
             pst2.setString(4,name_combo2.getSelectedItem().toString());
             pst2.setString(5,model.getValueAt(row,0).toString());
             pst2.setString(6,model.getValueAt(row,2).toString().trim());
             pst2.setString(7,model.getValueAt(row,1).toString().trim());
+            //pst1.executeUpdate();
             pst2.executeUpdate();
+            //System.out.print("update 2");
     
     
     
 new Update_record().setVisible(true);
+             }
+            
     
     }        catch(Exception e){
                     System.out.println(e.getMessage());     
@@ -676,70 +867,94 @@ new Update_record().setVisible(true);
 
     private void pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfActionPerformed
       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-          java.util.Date d3=date.getDate();
-          String SelectedBase=name_combo2.getSelectedItem().toString();
-    String quality=base.getSelectedItem().toString();
-          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-    String newDate3=formatter.format(d3);
-        JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");  
-        String query="select * from order_form where Date='"+newDate3+"' and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
-        String query2="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
-       
-       //pst2.executeQuery();
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection con;
+con = DriverManager.getConnection(
+"jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+java.util.Date d3=date.getDate();
+String SelectedBase=name_combo2.getSelectedItem().toString();
+String quality=base.getSelectedItem().toString();
+SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+String newDate3=formatter.format(d3);
+JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");
+String query="select SrNumber,Design,sarees,parcels from order_details where Date='"+newDate3+"' "
++ "and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
+
+String query2="select * from order_details od NATURAL JOIN order_form ofrm WHERE (od.PartyName='"+name_combo2.getSelectedItem().toString()+"') "
++ "and (od.Date='"+newDate3+"') and (od.Quality='"+base.getSelectedItem().toString()+"') and(ofrm.PartyName=od.PartyName) "
++ "and (ofrm.Date=od.Date) and (ofrm.Quality=od.Quality)";
+
+
+
+//pst2.executeQuery();
 JRDesignQuery newQuery=new JRDesignQuery();
-        newQuery.setText(query2);
-        jd.setQuery(newQuery);
-        
-        HashMap<String,Object> para = new HashMap<>();
-        PreparedStatement pst=con.prepareStatement(query);
-        
-                ResultSet rs=pst.executeQuery();
-                
-                int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0;
-                String agent_name="",rate="";
-               
-                System.out.println(totalSarees);
-                System.out.println(totalParcels);
-                while(rs.next()){
-                    form_no=rs.getInt("form_no");
-                    payment_days=rs.getInt("payment_days");
-                    sareesParcels=rs.getInt("sareesParcels");
-                    agent_name=rs.getString("Agent_name");
-                    rate=rs.getString("rate");
-                }
-                System.out.print(form_no);
-                para.put("form_no",form_no);
-                para.put("payment_days",payment_days);
-                para.put("sareesParcels",sareesParcels);
-                para.put("Agent_name",agent_name);
-                para.put("rate",rate);
-                para.put("PartyName",name_combo2.getSelectedItem().toString());
-                para.put("Date",date.getDate());
-                para.put("Quality",base.getSelectedItem().toString());
-                para.put("totalSarees",totalSarees);
-                para.put("totalParcels",totalParcels);
-                
-                JasperReport js=JasperCompileManager.compileReport(jd);
-                JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
-                JasperViewer.viewReport(jPrint,false);
-                 
-      }
-      catch(Exception e){
-                    System.out.println(e.getMessage());     
-         }    
-        
-        
-        
-        
- 
-        
+newQuery.setText(query2);
+jd.setQuery(newQuery);
+
+
+
+HashMap<String,Object> para = new HashMap<>();
+PreparedStatement pst=con.prepareStatement(query2);
+ResultSet rs=pst.executeQuery();
+
+
+
+int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0,SrNumber=0,sarees=0,parcels=0;
+String agent_name="",rate="",Design="";
+
+
+
+//System.out.println(totalSarees);
+//System.out.println(totalParcels);
+while(rs.next()){
+form_no=rs.getInt("form_no");
+payment_days=rs.getInt("payment_days");
+sareesParcels=rs.getInt("sareesParcels");
+agent_name=rs.getString("Agent_name");
+rate=rs.getString("rate");
+}
+//System.out.print(form_no);
+para.put("form_no",form_no);
+para.put("payment_days",payment_days);
+para.put("sareesParcels",sareesParcels);
+para.put("Agent_name",agent_name);
+para.put("rate",rate);
+para.put("PartyName",name_combo2.getSelectedItem().toString());
+para.put("Date",date.getDate());
+para.put("Quality",base.getSelectedItem().toString());
+para.put("totalSarees",totalSarees);
+para.put("totalParcels",totalParcels);
+
+List<PdfListTable> pdfTableList = new ArrayList<PdfListTable>();
+PreparedStatement pst2=con.prepareStatement(query);
+ResultSet rs2=pst2.executeQuery();
+while(rs2.next()){
+pdfTableList.add(new PdfListTable(rs2.getInt("SrNumber"),rs2.getString("Design"),rs2.getInt("sarees"),rs2.getInt("parcels")));
+}
+
+
+
+JRBeanCollectionDataSource listToData=new JRBeanCollectionDataSource(pdfTableList);
+para.put("ListToTablePdf",listToData);
+
+JasperReport js=JasperCompileManager.compileReport(jd);
+JasperPrint jPrint=JasperFillManager.fillReport(js,para,con);
+js.setProperty(MaxPagesGovernor.PROPERTY_MAX_PAGES, String.valueOf(1));
+JasperViewer.viewReport(jPrint,false);
+
+
+
+}
+catch(Exception e){
+System.out.println(e.getMessage());
+}
         
         
     }//GEN-LAST:event_pdfActionPerformed
+
+    private void totalSareesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalSareesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalSareesActionPerformed
 public ArrayList<orderDetails> date_quality_specific_order(){
         ArrayList<orderDetails> orderList3=new ArrayList<orderDetails>();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
@@ -771,7 +986,7 @@ public ArrayList<orderDetails> date_quality_specific_order(){
     ResultSet rs=pst.executeQuery();
    
     while(rs.next()){
-        od=new orderDetails(rs.getString("Date"),rs.getString("SrNumber"),rs.getString("Design"),rs.getString("Quality"),rs.getString("sarees"),rs.getString("parcels"),rs.getString("Agent_name"),rs.getString("form_no"),rs.getString("payment_days"),rs.getString("rate"),rs.getString("sareesParcels"));
+        od=new orderDetails(rs.getString("Date"),rs.getString("SrNumber"),rs.getString("Design"),rs.getString("city"),rs.getString("Quality"),rs.getString("sarees"),rs.getString("parcels"),rs.getString("Agent_name"),rs.getString("form_no"),rs.getString("payment_days"),rs.getString("rate"),rs.getString("sareesParcels"));
         orderList3.add(od);
         }
     }
@@ -797,6 +1012,7 @@ public void show_date_quality_user(){
              sareesParcels.setText(list3.get(i).getSareesParcels());
              rate.setText(list3.get(i).getRate());
              paymentDays.setText(list3.get(i).getPayment());
+             city.setText(list3.get(i).getCity());
              
              
              model.addRow(row);
@@ -1076,6 +1292,7 @@ public void FillCombo(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> agent_dropbox;
     private javax.swing.JComboBox<String> base;
+    private javax.swing.JTextField city;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton delete;
     private javax.swing.JTable displayTable;
@@ -1086,6 +1303,7 @@ public void FillCombo(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
