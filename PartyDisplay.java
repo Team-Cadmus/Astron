@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -42,28 +44,28 @@ ArrayList agentnames=new ArrayList();
     }
 private void FillCombo(){
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
+    model.setSelectedItem("---select party---");
     try{
          
          
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+       Connection con=null;
+    con=ConnectionManager.getConnection();
     
-    String sql="select PartyName from party_table";
+    String sql="select DISTINCT PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
     ResultSet rs=pst.executeQuery();
+    Set<String> partyNames = new HashSet<>();
     while(rs.next()){
+            
         String name=rs.getString("PartyName");
-        model.addElement(name);
+        partyNames.add(name);  
     }
-    namecombo.setModel(model);
-    //con.close();
-    //pst.close();
-    
-        
-        
+    ArrayList<String> partyList = new ArrayList<>(partyNames);
+        java.util.Collections.sort(partyList);
+        for(String agent: partyList){
+            model.addElement(agent);
+        }
+        namecombo.setModel(model);
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
@@ -118,11 +120,8 @@ public void show_user() {
       try{
          
          
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String selectedItem=namecombo.getSelectedItem().toString();
     int partyno=0;
     String sql="SELECT Party_No from party_table where PartyName=?";
@@ -276,6 +275,7 @@ public void show_user() {
 
         namecombo.setBackground(new java.awt.Color(249, 173, 129));
         namecombo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        namecombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---select party---" }));
         namecombo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 namecomboMouseClicked(evt);
@@ -470,7 +470,7 @@ public void show_user() {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -484,8 +484,8 @@ public void show_user() {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(43, 43, 43)
-                                .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(a1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -653,10 +653,8 @@ if(party_name.getText().isEmpty()){
 else{
     
     try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    Connection con=null;
+    con=ConnectionManager.getConnection();
     String nameOfParty= party_name.getText().trim().toUpperCase();
     String sql="select PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
@@ -724,9 +722,8 @@ if(party_name.getText().isEmpty()){
 
 else{
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con;
-        con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
         String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9,empty_text10,empty_text11,empty_text12,empty_text13;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
@@ -867,10 +864,8 @@ if(party_name.getText().isEmpty()){
              
         try{
             //Class.forName("com.mysql.cj.jdbc.Driver");
-     Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+     Connection con=null;
+    con=ConnectionManager.getConnection();
     String nameOfParty= party_name.getText().trim().toUpperCase();
     String sql="select PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
@@ -913,10 +908,8 @@ try{
     }
     else{
         
-            Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+            Connection con=null;
+    con=ConnectionManager.getConnection();
     int partyno;
             String query2="select Party_No from party_table where PartyName=?";
             //PreparedStatement pst1 = con.prepareStatement(query1);
@@ -994,9 +987,8 @@ else if((o1_m2.getText() == null ? String.valueOf(0) != null : !o1_m2.getText().
 }*/
 else{
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con;
-        con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
         String empty_text1,empty_text2,empty_text3,empty_text4,empty_text5,empty_text6,empty_text0,empty_text,empty_text7,empty_text8,empty_text9,empty_text10,empty_text11,empty_text12,empty_text13;
          String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
@@ -1298,9 +1290,8 @@ DatabaseName2();        // TODO add your handling code here:
 public void DatabaseName2(){
     try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+       Connection con=null;
+    con=ConnectionManager.getConnection();
     String query="select agent1,agent2,agent3 from party_details ";
     java.sql.Statement pst=con.createStatement();
     ResultSet rs=pst.executeQuery(query);
