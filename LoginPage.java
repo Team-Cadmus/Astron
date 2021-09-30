@@ -248,8 +248,8 @@ if(username.getText().trim().isEmpty() || password.getText().trim().isEmpty()){
         
         else{
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+            Connection con=null;
+    con=ConnectionManager.getConnection();
             String sql = "select * from login_details where Username=? and Password=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, username.getText());

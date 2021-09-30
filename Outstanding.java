@@ -76,8 +76,8 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             }
         }
          try{
-             Class.forName("com.mysql.cj.jdbc.Driver");  
-             Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");  
+           Connection con=null;
+    con=ConnectionManager.getConnection();
              String query="SELECT PartyName ,SUM(Outstanding)  as Outstanding,Agent from collection1 group by PartyName,Agent";
              Statement st=con.createStatement();
              ResultSet rs=st.executeQuery(query); 
