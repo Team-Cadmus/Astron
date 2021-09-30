@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.text.Document;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -121,10 +121,8 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     }
     }
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString();
     String query1="";
     switch (SelectedBase) {
@@ -375,7 +373,9 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,8 +408,8 @@ new AlertBox_FieldEmpty().setVisible(true);}
 else if(update_design.getText()!=""){
     
     try{
-             Class.forName("com.mysql.cj.jdbc.Driver");  
-             Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");  
+            Connection con=null;
+    con=ConnectionManager.getConnection();
             DefaultTableModel model = (DefaultTableModel) brp_table.getModel();
             String design, rms, gr, mill, total, selectedBase, query=null, deleteQuery;
             PreparedStatement pst = null;
@@ -501,13 +501,14 @@ else if(update_design.getText()!=""){
 
     private void save_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_pdfActionPerformed
 
-                MessageFormat header=new MessageFormat(base.getSelectedItem().toString().toUpperCase());
+              MessageFormat header=new MessageFormat(base.getSelectedItem().toString().toUpperCase());
         try{
            brp_table.print(JTable.PrintMode.FIT_WIDTH,header,null); 
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+              
         
         
     }//GEN-LAST:event_save_pdfActionPerformed

@@ -15,7 +15,9 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +52,7 @@ public class Collection1 extends javax.swing.JFrame {
      * Creates new form Collection1
      * 
      */
+    
     static int user_rights_binary=0;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public Collection1() {
@@ -597,6 +600,7 @@ public class Collection1 extends javax.swing.JFrame {
 
         name_combo2.setBackground(new java.awt.Color(249, 173, 129));
         name_combo2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        name_combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---select party---" }));
         name_combo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_combo2ActionPerformed(evt);
@@ -819,6 +823,7 @@ public class Collection1 extends javax.swing.JFrame {
 
         agent_dropbox.setBackground(new java.awt.Color(249, 173, 129));
         agent_dropbox.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
+        agent_dropbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---select agent---" }));
         jPanel2.add(agent_dropbox);
         agent_dropbox.setBounds(220, 110, 210, 27);
 
@@ -893,69 +898,75 @@ public class Collection1 extends javax.swing.JFrame {
         }*/
         
     }//GEN-LAST:event_button_table_nameActionPerformed
-private void FillCombo(){
+public void FillCombo(){
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
+    model.setSelectedItem("---select party---");
     try{
          
          
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+         Connection con=null;
+    con=ConnectionManager.getConnection();
     
-    String sql="select PartyName from party_table";
+    String sql="select DISTINCT PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
     ResultSet rs=pst.executeQuery();
+    Set<String> partyNames = new HashSet<>();
     while(rs.next()){
+            
         String name=rs.getString("PartyName");
-        model.addElement(name);
+        partyNames.add(name);  
     }
-    name_combo2.setModel(model);
-    //con.close();
-    //pst.close();
+    ArrayList<String> partyList = new ArrayList<>(partyNames);
+        java.util.Collections.sort(partyList);
+        for(String agent: partyList){
+            model.addElement(agent);
+        }
+        name_combo2.setModel(model);
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-private void FillAgentCombo(){
+public void FillAgentCombo(){
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
+
+    model.setSelectedItem("---select agent---");
     try{
-         
-         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    
-    String sql="select agent1,agent2,agent3 from party_details";
-    PreparedStatement pst=con.prepareStatement(sql);
-    ResultSet rs=pst.executeQuery();
-    while(rs.next()){
-        String name1=rs.getString("agent1");
-        String name2=rs.getString("agent2");
-        String name3=rs.getString("agent3");
-        if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
-        model.addElement(name1);
+        Connection con=null;
+    con=ConnectionManager.getConnection();
+
+        String sql="select DISTINCT agent1,agent2,agent3 from party_details";
+        PreparedStatement pst=con.prepareStatement(sql);
+        ResultSet rs=pst.executeQuery();
+        Set<String> agentNames = new HashSet<>();
+        while(rs.next()){
+            String name1=rs.getString("agent1");
+            String name2=rs.getString("agent2");
+            String name3=rs.getString("agent3");
+            if(name1 == null ? String.valueOf(0) != null : !name1.equals(String.valueOf(0))){
+                agentNames.add(name1);
+            }
+            if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
+                agentNames.add(name2);
+            }
+            if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
+                agentNames.add(name3);
+            }
         }
-                if(name2 == null ? String.valueOf(0) != null : !name2.equals(String.valueOf(0))){
-
-        model.addElement(name2);
-                }
-                        if(name3 == null ? String.valueOf(0) != null : !name3.equals(String.valueOf(0))){
-
-        model.addElement(name3);
-                        }
-    }
-    agent_dropbox.setModel(model);
+        ArrayList<String> agentList = new ArrayList<>(agentNames);
+        java.util.Collections.sort(agentList);
+//      for(String agent: agentList)
+//          System.out.println(agent);
+        for(String agent: agentList){
+            model.addElement(agent);
+        }
+        agent_dropbox.setModel(model);
     //con.close();
     //pst.close();
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
-        }
+    }
 }
 
     private void name_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_comboboxActionPerformed
@@ -1136,21 +1147,9 @@ private void FillAgentCombo(){
     }
     }
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=name_combo2.getSelectedItem().toString();
-    /*String query1="SELECT partyname FROM party_table";
-    PreparedStatement pst=con.prepareStatement(query1);
-    ResultSet rs=pst.executeQuery();
-    int count=0;
-    DataColl col;
-    while(rs.next()){
-        String com=rs.getString("partyname");
-        if(com.equals(PartyName2));
-        {
-            count++;*/
     DataColl col;
         String query2="SELECT * FROM collection1 WHERE PartyName=?";
         PreparedStatement pst1=con.prepareStatement(query2);
@@ -1838,12 +1837,15 @@ try{
             int i= col_table2.getSelectedRow();
             TableModel model=col_table2.getModel();
             String billNo=(String) model.getValueAt(i,1);
-            Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-            String selQuery="Select RecievedDate,DaysDecided,GRNumber,GRDate,Agent from collection1 where BillNumber=?";
+             Connection con=null;
+    con=ConnectionManager.getConnection();
+            int row=col_table2.getSelectedRow();
+            String selQuery="Select RecievedDate,DaysDecided,GRNumber,GRDate,Agent from collection1 where BillNumber=? and OrderDate=?";
             PreparedStatement pst=con.prepareStatement(selQuery); 
             pst.setString(1, billNo);
+         
+            pst.setString(2,model.getValueAt(row,0).toString());
+            
             ResultSet rs=pst.executeQuery(); 
             try{
                 java.util.Date orderDate= new  SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse((String) model.getValueAt(i,0));
@@ -1899,10 +1901,6 @@ try{
                 Logger.getLogger(Collection1.class.getName()).log(Level.SEVERE, null, ex);
             }
              agent_dropbox.setSelectedItem(agent);
-            
-            
-            
-           
             if (days2dec==null || "".equals(days2dec)) {
                        days_decd2.setText(""); 
                 } else {
@@ -2046,25 +2044,29 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
     }   else{
             
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+             Connection con=null;
+    con=ConnectionManager.getConnection();
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+    java.util.Date d1=order_date2.getDate();
+    String newDate=formatter.format(d1);
     DefaultTableModel model = (DefaultTableModel) col_table2.getModel();
             int row = col_table2.getSelectedRow();
             PreparedStatement pst;
             ResultSet rs;
-           String query="Select * from collection1 where BillNumber=?";
+           String query="Select * from collection1 where BillNumber=? and OrderDate=?";
            pst=con.prepareStatement(query);
            pst.setString(1,billNo2.getText().trim());
+           pst.setString(2,newDate);
            int sno=0;
            rs=pst.executeQuery();
             if(rs.next()==true){
                 sno=rs.getInt(1);
-                String query1="DELETE from collection1 where BillNumber=?";
+                String query1="DELETE from collection1 where BillNumber=? and OrderDate=?";
             pst = con.prepareStatement(query1);
             pst.setString(1,billNo2.getText().trim());
+            pst.setString(2,newDate);
             pst.executeUpdate();
-            PartyName2.setText("");
+            /*PartyName2.setText("");
                 name_combo2.setSelectedIndex(0);
                 order_date2.setDate(null);
                 billNo2.setText("");
@@ -2076,7 +2078,7 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
                 gr_no2.setText("");
                 gr_date2.setDate(null);
                 days_decd2.setText("");
-                gr_amt2.setText("");
+                gr_amt2.setText("");*/
              new Deleted_record().setVisible(true);
             model.removeRow(row);
            // new Deleted_record();
@@ -2094,11 +2096,11 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
 
     private void update_details2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_details2ActionPerformed
 
-    if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText().isEmpty()||days2.getText().isEmpty()||amt2.getText().isEmpty()||recd_date2.getDate()==null||recd_amt2.getText().isEmpty()||xs_days2.getText().isEmpty()||days_decd2.getText().isEmpty()==true){
+    /*if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText().isEmpty()||days2.getText().isEmpty()||amt2.getText().isEmpty()||recd_date2.getDate()==null||recd_amt2.getText().isEmpty()||xs_days2.getText().isEmpty()||days_decd2.getText().isEmpty()==true){
    new AlertBox_FieldEmpty().setVisible(true);
-    }   
+    }*/   
     
-else if(!Pattern.matches("^[0-9]+$",amt2.getText())){
+ if(!Pattern.matches("^[0-9]+$",amt2.getText())){
             new Invalid_Format().setVisible(true);
             amt2.setText("");
             amt2.grabFocus();
@@ -2119,15 +2121,15 @@ else{// TODO add your handling code here:
                 try{
                
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+         Connection con=null;
+    con=ConnectionManager.getConnection();
     TableModel model=col_table2.getModel();
             int row=col_table2.getSelectedRow();
             
-            String query="Select SrNumber from collection1 where BillNumber=?";
+            String query="Select SrNumber from collection1 where BillNumber=? and OrderDate=?";
            PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,model.getValueAt(row,1).toString().toUpperCase());
+            pst.setString(2,model.getValueAt(row,0).toString());
             ResultSet rs=pst.executeQuery();
             int database_pk=0;
             if(rs.next()){
@@ -2148,12 +2150,18 @@ else{// TODO add your handling code here:
                 pst.setString(3,days2.getText());
                 pst.setString(4,amt2.getText());
                 java.util.Date d2=recd_date2.getDate();
-                String order_date22=formatter.format(d2);
+                String order_date22;
+                if (recd_date2.getDate() == null) {
+                    order_date22=null;
+                } else {
+                     
+                    order_date22=formatter.format(d2);
+                }      
                 pst.setString(5,order_date22);
                 pst.setString(6,recd_amt2.getText());
                 int x=Integer.parseInt(days2.getText())-Integer.parseInt(days_decd2.getText());
               String xsdays2;
-            if(x < 0){
+            if(x < 0 ){
                 xs_days2.setText(String.valueOf(0));
                 xsdays2="0";
             }
@@ -2192,19 +2200,7 @@ else{// TODO add your handling code here:
                 pst.executeUpdate();
                 show_user();
                 //FillCombo();  
-                PartyName2.setText("");
-                name_combo2.setSelectedIndex(0);
-                order_date2.setDate(null);
-                billNo2.setText("");
-                days2.setText("");
-                amt2.setText("");
-                recd_date2.setDate(null);
-                recd_amt2.setText("");
-                xs_days2.setText("");
-                gr_no2.setText("");
-                gr_date2.setDate(null);
-                days_decd2.setText("");
-                gr_amt2.setText("");
+                
                 new Update_record().setVisible(true);  
                }
        }
@@ -2241,22 +2237,8 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
                 try{
      
   
-     Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    String nameOfBill= billNo2.getText().trim().toUpperCase();
-    String sqlin="select BillNumber from collection1";
-    PreparedStatement pstin=con.prepareStatement(sqlin);
-    ResultSet rs=pstin.executeQuery();
-    int count=0;
-                    while(rs.next()){
-                        String stringToCompare = rs.getString("BillNumber"); 
-                        if(nameOfBill.equals(stringToCompare)){
-                           count++;
-                        }
-                    }
-                    if(count==0){
+      Connection con=null;
+    con=ConnectionManager.getConnection();              
     String sql="SELECT Party_No from party_table WHERE PartyName=?";
     PreparedStatement pst0=con.prepareStatement(sql);
     pst0.setString(1,PartyName2.getText().trim().toUpperCase());
@@ -2330,25 +2312,12 @@ if(PartyName2.getText().isEmpty()||order_date2.getDate()==null||billNo2.getText(
     pst.setString(15,agent_dropbox.getSelectedItem().toString());
     pst.executeUpdate();
     new InsertedSuccessfully().setVisible(true);
-    PartyName2.setText("");
-                name_combo2.setSelectedIndex(0);
-                order_date2.setDate(null);
-                billNo2.setText("");
-                days2.setText("");
-                amt2.setText("");
-                recd_date2.setDate(null);
-                recd_amt2.setText("");
-                xs_days2.setText("");
-                gr_no2.setText("");
-                gr_date2.setDate(null);
-                days_decd2.setText("");
-                gr_amt2.setText("");
+    show_user();
+    //PartyName2.setText("");
+                
         
  
-}
-                     else{
-                        new BillNo_Repeat().setVisible(true);
-                        }
+
                 }
                
 catch(Exception e){

@@ -203,10 +203,8 @@ public class SignUp extends javax.swing.JFrame {
 
     private void sign_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sign_upActionPerformed
 if(username.getText()!="" && password.getText()!=""){try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+    Connection con=null;
+    con=ConnectionManager.getConnection();
     if(username.getText().toUpperCase().matches("[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")){
                     String selQuery="SELECT * FROM login_details where Username=?";
                     PreparedStatement pst=con.prepareStatement(selQuery);

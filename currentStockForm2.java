@@ -331,10 +331,8 @@ if(design.getText().trim().isEmpty()){
 }
 else{try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString();
      designToExtract="";
     designToExtract=design.getText().toUpperCase().trim();
@@ -450,10 +448,8 @@ catch (ClassNotFoundException | SQLException e) {
     else if(design.getText()!=""){
         try{
              
-             Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+             Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString();
             PreparedStatement pst;
             String sql="";
@@ -627,8 +623,8 @@ new currentStockForm3();
         else{
             
                 try{
-            Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con=DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");  
+            Connection con=null;
+    con=ConnectionManager.getConnection();
             PreparedStatement pst;
                 String selBase=base.getSelectedItem().toString();
                 String sql="";
@@ -770,12 +766,12 @@ new currentStockForm3();
                     
                 }
                 if(count==1){
-                    base.setSelectedIndex(0);
+                    /*base.setSelectedIndex(0);
                     design.setText("");
                     rms.setText("");
                     gr.setText("");
                     mill.setText("");
-                    total.setText("");
+                    total.setText("");*/
                     new Update_record().setVisible(true);
                 }
             }
@@ -882,9 +878,8 @@ DatabaseName();        // TODO add your handling code here:
 public void DatabaseName(){
     try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+       Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString().toUpperCase();
     /*String sql="select * from balatan_rich_pallu";
         java.sql.Statement pst=con.createStatement();

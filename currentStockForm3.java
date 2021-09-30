@@ -383,10 +383,8 @@ if(design.getText().trim().isEmpty()){
 }
 else{try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+      Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString();
      designToExtract="";
     designToExtract=design.getText().toUpperCase().trim();
@@ -519,12 +517,11 @@ catch (ClassNotFoundException | SQLException e) {
             else if(design.getText()!=""&&refrommill.getText()!=""){
                 try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
+       
      PreparedStatement pst;
      ResultSet rs;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+   Connection con=null;
+    con=ConnectionManager.getConnection();
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     
@@ -622,14 +619,14 @@ catch (ClassNotFoundException | SQLException e) {
             pst.setString(5,design.getText().trim().toUpperCase());
          
             pst.executeUpdate();
-            base.setSelectedIndex(0);
+            /*base.setSelectedIndex(0);
             design.setText("");
             rms.setText("");
             gr.setText("");
             refrommill.setText("");
             GRCleared.setText("");
             mill.setText("");
-            total.setText("");
+            total.setText("");*/
             new Update_record().setVisible(true);
     
         }
@@ -665,11 +662,10 @@ catch (ClassNotFoundException | SQLException e) {
              else if(design.getText()!=""&&GRCleared.getText()!=""){
                   
                  try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
+      
      PreparedStatement pst;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    Connection con=null;
+    con=ConnectionManager.getConnection();
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
@@ -776,7 +772,7 @@ catch (ClassNotFoundException | SQLException e) {
             pst.setString(4,total.getText().trim());
             pst.setString(5,design.getText().trim().toUpperCase());
             pst.executeUpdate();
-            base.setSelectedIndex(0);
+            /*base.setSelectedIndex(0);
             design.setText("");
             rms.setText("");
             gr.setText("");
@@ -784,7 +780,7 @@ catch (ClassNotFoundException | SQLException e) {
             GRCleared.setText("");
             refrommill.setText("");
             mill.setText("");
-            total.setText("");
+            total.setText("");*/
             new Update_record().setVisible(true);
     
          }
@@ -825,11 +821,10 @@ dispose();// TODO add your handling code here:
              else if(rmscleared.getText()!=""&&design.getText()!=""){ 
                  
                  try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
+        
      PreparedStatement pst;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+   Connection con=null;
+    con=ConnectionManager.getConnection();
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
@@ -931,7 +926,7 @@ dispose();// TODO add your handling code here:
             pst.setString(4,total.getText().trim());
             pst.setString(5,design.getText().trim().toUpperCase());
             pst.executeUpdate();
-            base.setSelectedIndex(0);
+            /*base.setSelectedIndex(0);
             design.setText("");
             rms.setText("");
             gr.setText("");
@@ -939,7 +934,7 @@ dispose();// TODO add your handling code here:
             refrommill.setText("");
             rmscleared.setText("");
             mill.setText("");
-            total.setText("");
+            total.setText("");*/
             new Update_record().setVisible(true);
     
          }
@@ -986,11 +981,10 @@ if(design.getText().trim().isEmpty()){
              else if(design.getText()!=""&&GRCleared.getText()!=""&&rmscleared.getText()!=""&&refrommill.getText()!=""){
                   
                  try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
+        
      PreparedStatement pst;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    Connection con=null;
+    con=ConnectionManager.getConnection();
     String selBase=base.getSelectedItem().toString();
     String sql=null;
     ResultSet rs;
@@ -1127,7 +1121,7 @@ if(design.getText().trim().isEmpty()){
             pst.setString(4,total.getText().trim());
             pst.setString(5,design.getText().trim().toUpperCase());
             pst.executeUpdate();
-            base.setSelectedIndex(0);
+            /*base.setSelectedIndex(0);
             design.setText("");
             rms.setText("");
             gr.setText("");
@@ -1135,7 +1129,7 @@ if(design.getText().trim().isEmpty()){
             GRCleared.setText("");
             refrommill.setText("");
             mill.setText("");
-            total.setText("");
+            total.setText("");*/
             new Update_record().setVisible(true);
     
          }
@@ -1243,9 +1237,8 @@ switch(evt.getKeyCode()){
 public void DatabaseName(){
     try{
         
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_bYz4P","u159657273_9OFDL","Vaishnavi$2801");
+       Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString().toUpperCase();
     /*String sql="select * from balatan_rich_pallu";
         java.sql.Statement pst=con.createStatement();

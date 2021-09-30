@@ -54,7 +54,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author Dell
  */
 public class OrderForm extends javax.swing.JFrame {
-
+public Collection1 c;
     /**
      * Creates new form OrderForm
      */
@@ -71,7 +71,7 @@ public class OrderForm extends javax.swing.JFrame {
         displayTable.setDefaultRenderer(Object.class, alteredColorRenderer);
         headerColorAndWidth();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-         
+        
        
     }
     class Demo extends DefaultListCellRenderer
@@ -173,8 +173,9 @@ public class OrderForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         i_want_to = new javax.swing.JComboBox<>();
         search = new javax.swing.JButton();
-        city = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        city = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("Software_logo.jpeg")).getImage());
@@ -347,11 +348,14 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
-        city.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
-
         jLabel12.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("City:");
+
+        city.setColumns(20);
+        city.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        city.setRows(5);
+        jScrollPane2.setViewportView(city);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -391,15 +395,15 @@ public class OrderForm extends javax.swing.JFrame {
                                                 .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(300, 300, 300))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(jLabel12)
                                                             .addComponent(jLabel1))
                                                         .addGap(99, 99, 99)
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(city)
-                                                            .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jScrollPane2)))
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(jLabel2)
                                                         .addGap(90, 90, 90)
@@ -444,25 +448,25 @@ public class OrderForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(i_want_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(formNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(agent_dropbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(name_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sareesParcels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -470,15 +474,14 @@ public class OrderForm extends javax.swing.JFrame {
                                 .addComponent(paymentDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(base, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5)))
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,7 +527,7 @@ public class OrderForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 177, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,10 +541,8 @@ public class OrderForm extends javax.swing.JFrame {
 
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
 try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+    Connection con=null;
+    con=ConnectionManager.getConnection();
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     java.util.Date d3=date.getDate();
     String newDate3=formatter.format(d3);
@@ -564,7 +565,8 @@ try{
     }
     else if(i_want_to.getSelectedIndex()==0){
     int rows=displayTable.getRowCount();
-    int totalSarees=0,totalParcels=0;
+    int totalSarees=0;
+    int totalParcels=0;
     //System.out.println(rows);
     for(int row=0;row<rows;row++){
        
@@ -580,18 +582,17 @@ try{
         //System.out.println(totalParcels);
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
-    String query2="insert into order_details(PartyName,city,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
+    String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
     String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
     PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
-     pst2.setString(2,city.getText());
-    pst2.setString(3,newDate3);
-    pst2.setString(4,srno);
-     pst2.setString(5,design);
-      pst2.setString(6,SelectedBase);
-       pst2.setString(7,sarees);
-       pst2.setString(8, parcels);
+    pst2.setString(2,newDate3);
+    pst2.setString(3,srno);
+     pst2.setString(4,design);
+      pst2.setString(5,SelectedBase);
+       pst2.setString(6,sarees);
+       pst2.setString(7, parcels);
        
        pst2.executeUpdate();
        pst3.setInt(1,totalParcels);
@@ -620,7 +621,8 @@ try{
     pst1.setString(9,SelectedBase);
     pst1.executeUpdate();
     int rows=displayTable.getRowCount();
-    int totalSarees=0,totalParcels=0;
+    int totalSarees=0;
+    int totalParcels=0;
     //System.out.println(rows);
     for(int row=0;row<rows;row++){
        
@@ -634,18 +636,18 @@ try{
         totalParcels=Integer.parseInt(parcels)+totalParcels;
    
     if((date1=="" || date1==null)&&(quality=="" ||quality==null)){
-    String query2="insert into order_details(PartyName,city,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?,?)";
+    String query2="insert into order_details(PartyName,Date,SrNumber,Design,Quality,sarees,parcels) values(?,?,?,?,?,?,?)";
     PreparedStatement pst2=con.prepareStatement(query2);
     String query3="update order_form set totalParcels=?,totalSarees=? where Date=? and PartyName=? and Quality=?";
     PreparedStatement pst3=con.prepareStatement(query3);
     pst2.setString(1,party);
-    pst2.setString(2,city.getText());
-    pst2.setString(3,newDate3);
-    pst2.setString(4,srno);
-     pst2.setString(5,design);
-      pst2.setString(6,SelectedBase);
-       pst2.setString(7,sarees);
-       pst2.setString(8, parcels);
+    //pst2.setString(2,city.getText());
+    pst2.setString(2,newDate3);
+    pst2.setString(3,srno);
+     pst2.setString(4,design);
+      pst2.setString(5,SelectedBase);
+       pst2.setString(6,sarees);
+       pst2.setString(7, parcels);
        
        pst2.executeUpdate();
        
@@ -706,10 +708,8 @@ show_user();        // TODO add your handling code here:
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
 try{
       if(i_want_to.getSelectedIndex()==5){  
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+           Connection con=null;
+    con=ConnectionManager.getConnection();
     DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
             int row = displayTable.getSelectedRow();
             String date=(String)displayTable.getValueAt(row,0);
@@ -741,10 +741,8 @@ try{
             model.removeRow(row);
       }
       else if(i_want_to.getSelectedIndex()==6){
-     Class.forName("com.mysql.cj.jdbc.Driver");
-        
-     Connection con;
-    con = DriverManager.getConnection("jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+     Connection con=null;
+    con=ConnectionManager.getConnection();
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
     java.util.Date d3=date.getDate();
     String newDate3=formatter.format(d3);
@@ -753,6 +751,7 @@ try{
     pst1.setString(1, formNo.getText());
     pst1.setString(2, name_combo2.getSelectedItem().toString());
     pst1.setString(3, newDate3);
+    pst1.executeUpdate();
         
     String query2="delete from order_details where PartyName=? and Date=? and Quality=?";
     PreparedStatement pst2=con.prepareStatement(query2);
@@ -760,9 +759,13 @@ try{
     pst2.setString(1, name_combo2.getSelectedItem().toString());
     pst2.setString(2, newDate3);
     pst2.setString(3,base.getSelectedItem().toString());
-    pst1.executeUpdate();
+    
+    //System.out.println("1");
+    //System.out.println("2");
     pst2.executeUpdate();
+    new Deleted_record().setVisible(true);
       }
+      
         
 }
 catch(Exception e){
@@ -793,11 +796,11 @@ SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
         try{  
     
-         Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+         Connection con=null;
+    con=ConnectionManager.getConnection();
     int rows=displayTable.getRowCount();
-    int totalSarees=0,totalParcels=0;
+    int totalSarees=0;
+    int totalParcels=0;
 for(int row=0;row<rows;row++){
      String sarees=(String)displayTable.getValueAt(row,4);
         String parcels=(String)displayTable.getValueAt(row,5);
@@ -867,16 +870,14 @@ new Update_record().setVisible(true);
 
     private void pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfActionPerformed
       try{
-Class.forName("com.mysql.cj.jdbc.Driver");
-Connection con;
-con = DriverManager.getConnection(
-"jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+Connection con=null;
+    con=ConnectionManager.getConnection();
 java.util.Date d3=date.getDate();
 String SelectedBase=name_combo2.getSelectedItem().toString();
 String quality=base.getSelectedItem().toString();
 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 String newDate3=formatter.format(d3);
-JasperDesign jd=JRXmlLoader.load("D:\\Team Cadmus\\Astron\\src\\orderforms.jrxml");
+JasperDesign jd=JRXmlLoader.load("D:\\Astron\\orderforms.jrxml");
 String query="select SrNumber,Design,sarees,parcels from order_details where Date='"+newDate3+"' "
 + "and PartyName='"+name_combo2.getSelectedItem().toString()+"' and Quality='"+base.getSelectedItem().toString()+"'";
 
@@ -899,7 +900,7 @@ ResultSet rs=pst.executeQuery();
 
 
 
-int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0,SrNumber=0,sarees=0,parcels=0;
+int form_no=0,payment_days=0,sareesParcels=0,totalSarees=0,totalParcels=0;
 String agent_name="",rate="",Design="";
 
 
@@ -964,10 +965,8 @@ public ArrayList<orderDetails> date_quality_specific_order(){
     }
     }
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+       Connection con=null;
+    con=ConnectionManager.getConnection();
     
     String SelectedBase=name_combo2.getSelectedItem().toString();
     String quality=base.getSelectedItem().toString();
@@ -999,7 +998,8 @@ public void show_date_quality_user(){
         ArrayList<orderDetails> list3=date_quality_specific_order();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
     String[] row=new String[6];
-    int total_sarees=0,total_parcels=0;
+    int total_sarees=0;
+    int total_parcels=0;
     for(int i=0;i<list3.size();i++){
                 row[0]=list3.get(i).getDate();
                 row[1]=list3.get(i).getQuality();
@@ -1032,11 +1032,8 @@ public void show_date_quality_user(){
     }
     }
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=name_combo2.getSelectedItem().toString();
     order od;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
@@ -1062,7 +1059,8 @@ public void show_date_quality_user(){
         ArrayList<order> list2=date_specific_order();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
     String[] row=new String[6];
-    int total_sarees=0,total_parcels=0;
+    int total_sarees=0;
+    int total_parcels=0;
     for(int i=0;i<list2.size();i++){
                 row[0]=list2.get(i).getDate();
                 row[1]=list2.get(i).getQuality();
@@ -1088,11 +1086,8 @@ public void show_date_quality_user(){
     }
     }
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=name_combo2.getSelectedItem().toString();
     order od;
     String query="select * from order_details where PartyName=?";
@@ -1113,7 +1108,8 @@ public void show_date_quality_user(){
         ArrayList<order> list=order();
         DefaultTableModel model=(DefaultTableModel)displayTable.getModel();
     String[] row=new String[6];
-    int total_sarees=0,total_parcels=0;
+    int total_sarees=0;
+    int total_parcels=0;
     for(int i=0;i<list.size();i++){
                 row[0]=list.get(i).getDate();
                 row[1]=list.get(i).getQuality();
@@ -1142,11 +1138,8 @@ public void show_date_quality_user(){
     try{
          
          
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
+        Connection con=null;
+    con=ConnectionManager.getConnection();
     String query="select DISTINCT agent1,agent2,agent3 from party_details";
     agents ag;
     PreparedStatement pst=con.prepareStatement(query);
@@ -1167,45 +1160,27 @@ public void show_date_quality_user(){
 }
 public void FillCombo(){
     DefaultComboBoxModel model = new DefaultComboBoxModel(); 
-    int count=0;
-    int compare=0;
-    boolean added;
-    Object obj;
     model.setSelectedItem("---select party---");
     try{
          
          
-        Class.forName("com.mysql.cj.jdbc.Driver");
-     
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-    
-    String sql="select PartyName from party_table";
+       Connection con=null;
+    con=ConnectionManager.getConnection();
+    String sql="select DISTINCT PartyName from party_table";
     PreparedStatement pst=con.prepareStatement(sql);
     ResultSet rs=pst.executeQuery();
+    Set<String> partyNames = new HashSet<>();
     while(rs.next()){
-            added=false;
+            
         String name=rs.getString("PartyName");
-        count=name_combo2.getItemCount();
-        for (int i = 0; i < count; i++) {
-           obj = name_combo2.getItemAt(i);
-           compare = name.compareToIgnoreCase(obj.toString());
-           if (compare <= 0) { 
-               name_combo2.insertItemAt(name, i);
-               added = true;
-               break;
-          }
-      }
-      if (!added) {
-          name_combo2.addItem(name);
-      }
-        
-        
+        partyNames.add(name);  
     }
-    
-    //con.close();
-    //pst.close();
+    ArrayList<String> partyList = new ArrayList<>(partyNames);
+        java.util.Collections.sort(partyList);
+        for(String agent: partyList){
+            model.addElement(agent);
+        }
+        name_combo2.setModel(model);
     }
     catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
@@ -1216,11 +1191,8 @@ public void FillCombo(){
 
     model.setSelectedItem("---select agent---");
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con;
-        con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1","Vaishnavi$2801");
-
+        Connection con=null;
+    con=ConnectionManager.getConnection();
         String sql="select DISTINCT agent1,agent2,agent3 from party_details";
         PreparedStatement pst=con.prepareStatement(sql);
         ResultSet rs=pst.executeQuery();
@@ -1292,7 +1264,7 @@ public void FillCombo(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> agent_dropbox;
     private javax.swing.JComboBox<String> base;
-    private javax.swing.JTextField city;
+    private javax.swing.JTextArea city;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton delete;
     private javax.swing.JTable displayTable;
@@ -1314,6 +1286,7 @@ public void FillCombo(){
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> name_combo2;
     private javax.swing.JTextField paymentDays;
     private javax.swing.JButton pdf;
