@@ -10,8 +10,11 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -36,7 +39,7 @@ import javax.swing.text.DocumentFilter;
  */
 public class currentStockForm1 extends javax.swing.JFrame {
 static int user_rights_binary=0;
-
+ArrayList names=new ArrayList();
 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /** Creates new form cureentStockForm1 */
@@ -44,6 +47,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         initComponents();
     setLocation(screenSize.width/2-getWidth()/2, screenSize.height/2-getHeight()/2);
     setVisible(true);
+    DatabaseName();
     //User_Rights();
         base.setEditable(false);
         base.setRenderer(new Demo(base.getRenderer()));
@@ -157,6 +161,16 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         jLabel6.setText("Total:");
 
         design.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
+        design.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                designMouseClicked(evt);
+            }
+        });
+        design.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                designKeyPressed(evt);
+            }
+        });
 
         rms.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
 
@@ -424,11 +438,8 @@ else if(Pattern.matches("^[0-9]+$",design.getText())){
             
         try{      
           
-     Class.forName("com.mysql.cj.jdbc.Driver");
-     Connection con;
-    con = DriverManager.getConnection(
-            "jdbc:mysql://sql452.main-hosting.eu:3306/u159657273_astron","u159657273_user1 ","Vaishnavi$2801");
-    //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+     Connection con=null;
+    con=ConnectionManager.getConnection();
     String SelectedBase=base.getSelectedItem().toString();
     
     String query = null;
@@ -515,8 +526,31 @@ else if(Pattern.matches("^[0-9]+$",design.getText())){
     }//GEN-LAST:event_baseActionPerformed
     
     private void baseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_baseMouseClicked
-
+DatabaseName();
     }//GEN-LAST:event_baseMouseClicked
+
+    private void designMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_designMouseClicked
+DatabaseName();        // TODO add your handling code here:
+    }//GEN-LAST:event_designMouseClicked
+
+    private void designKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_designKeyPressed
+switch(evt.getKeyCode()){
+            case KeyEvent.VK_BACK_SPACE:
+                break;
+            case KeyEvent.VK_ENTER:
+                design.setText(design.getText().toUpperCase());
+                break;
+            default:
+                EventQueue.invokeLater(new Runnable(){
+                    @Override
+            public void run() {
+                String txt=design.getText().toUpperCase();
+                autocomplete(txt);//To change body of generated methods, choose Tools | Templates.
+            }
+                    
+                });
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_designKeyPressed
 
     /**
      * @param args the command line arguments
@@ -574,5 +608,118 @@ f1.dialogue();/*
     private javax.swing.JTextField rms;
     private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
-
+public void DatabaseName(){
+    try{
+        
+        Connection con=null;
+    con=ConnectionManager.getConnection();
+    String SelectedBase=base.getSelectedItem().toString().toUpperCase();
+    /*String sql="select * from balatan_rich_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+        rs.close();
+        pst.close();*/
+    if("BALATAN BUTTA RICH PALLU".equals(SelectedBase)){
+        //System.out.println("In Balatan rich palllu");
+        String sql="select *from balatan_rich_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+        
+        
+    }
+    else if("RAW SLUB BUTTA RICH PALLU".equals(SelectedBase)){
+        //System.out.println("In raw rich pallu");
+        String sql="select *from raw_rich_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+       
+        
+    }
+    else if("BALATAN BUTTA CHIT PALLU".equals(SelectedBase)){
+        //System.out.println("balatan chit pallu");
+        String sql="select *from balatan_chit_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+        
+        
+    }
+    else if("RAW SLUB BUTTA CHIT PALLU".equals(SelectedBase)){
+        //System.out.println("Raw chit pallu");
+        String sql="select *from raw_chit_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+       
+        
+    }
+    else if("BALATAN EMBOSE CHIT PALLU".equals(SelectedBase)){
+        //System.out.println("In embose chit pallu");
+        String sql="select *from embose_chit_pallu";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+       
+        
+    }
+    else if("RAW SLUB ALL OVER BUTTA".equals(SelectedBase)){
+        //System.out.println("all over butta");
+        String sql="select *from all_over_butta";
+        java.sql.Statement pst=con.createStatement();
+        ResultSet rs=pst.executeQuery(sql);
+        while(rs.next()){
+            String Name=rs.getString("Design");
+            names.add(Name);
+        }
+        
+        
+    }
+    
+    }
+    catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    
+}
+public void autocomplete(String txt){
+    String complete="";
+    int start=txt.length();
+    int end=txt.length();
+    int a;
+    for(a=0;a<names.size();a++){
+        if(names.get(a).toString().toUpperCase().startsWith(txt)){
+          complete=names.get(a).toString().toUpperCase();
+          end=complete.length();
+          break;
+        }
+    }
+    if(end>start){
+        design.setText(complete);
+        design.setCaretPosition(end);
+        design.moveCaretPosition(start);
+        
+    }
+    
+}
 }
