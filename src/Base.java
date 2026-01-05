@@ -1,8 +1,6 @@
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -170,7 +168,7 @@ Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         });
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 300, 140));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data entry.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/screenshots/data entry.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
